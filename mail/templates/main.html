@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.1/css/all.css"
+  integrity="sha384-gfdkjb5BdAXd+lj+gudLWI+BXq4IuLW5IT+brZEZsLFm++aCMlF1V92rMkPaX4PP" crossorigin="anonymous">  
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Mailer</title>
+    <style>
+    
+      .file-input {
+  display: inline-block;
+  text-align: left;
+  background: #fff;
+  padding: 16px;
+  width: 100%;
+  position: relative;
+  border-radius: 5px;
+  border:2px solid #e9e9e9;
+}
+
+.file-input > [type='file'] {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  z-index: 10;
+  cursor: pointer;
+}
+
+.file-input > .button {
+  display: inline-block;
+  cursor: pointer;
+  background: #eee;
+  padding: 8px 16px;
+  border-radius: 2px;
+  margin-right: 8px;
+}
+
+.file-input:hover > .button {
+  background: dodgerblue;
+  color: white;
+}
+
+.file-input > .label {
+  white-space: nowrap;
+  opacity: .3;
+}
+
+.file-input.-chosen > .label {
+  opacity: 1;
+}
+    </style>
+</head>
+<body>
+    <nav class="navbar navbar-light bg-light sticky-top">
+        <form class="form-inline">
+          <a class="btn btn-primary mr-2" href="/guide">Guide</a>  
+          <a class="btn btn-success" href="/logout">Logout</a>
+        </form>
+        <a class="navbar-brand" href="#">
+          <img src="../static/logo.png" height="30" alt="">
+        </a>
+      </nav>
+
+
+{% for message in messages %}
+
+  <center class="mt-4"><h2 class="message">{{ message }}</h2></center>
+
+{% endfor %}
+
+      <div class="container-fluid mt-4">
+
+          <nav>
+              <div class="nav nav-tabs" id="nav-tab" role="tablist">
+                <a class="nav-item nav-link active" id="nav-home-tab" data-toggle="tab" href="#nav-home" role="tab" aria-controls="nav-home" aria-selected="true">Emails</a>
+                <a class="nav-item nav-link" id="nav-profile-tab" data-toggle="tab" href="#nav-profile" role="tab" aria-controls="nav-profile" aria-selected="false">Phone</a>
+                <a class="nav-item nav-link" id="nav-template-tab" data-toggle="tab" href="#nav-templates" role="tab" aria-controls="nav-template" aria-selected="false">My HTML templates</a>
+              
+              </div>
+            </nav>
+
+            <div class="tab-content" id="nav-tabContent">
+                <div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
+                    <div class="row mt-4">
+                        <div class="col-3">
+                          <div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
+                            <a class="nav-link active" id="v-pills-home-tab" data-toggle="pill" href="#v-pills-home" role="tab" aria-controls="v-pills-home" aria-selected="true">On your own</a>
+                            <a class="nav-link" id="v-pills-profile-tab" data-toggle="pill" href="#v-pills-profile" role="tab" aria-controls="v-pills-profile" aria-selected="false">From txt file</a>
+                            <a class="nav-link" id="v-pills-config-tab" data-toggle="pill" href="#v-pills-config" role="tab" aria-controls="v-pills-config" aria-selected="false">Config</a>
+                          </div>
+                        </div>
+                        <div class="col-9">
+                          <div class="tab-content" id="v-pills-tabContent">
+                            <div class="tab-pane fade show active" id="v-pills-home" role="tabpanel" aria-labelledby="v-pills-home-tab">
+    
+                                    <form method="POST" enctype="multipart/form-data">
+                                            {% csrf_token %}
+                                        <div class="form-group">
+                                              <label for="exampleInputEmail1">Email address</label>
+                                              <input type="email" class="form-control" name="email" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Email" required>
+                                              <small id="emailHelp" class="form-text text-muted">Enter email where you would like to send a message.</small>
+                                            </div>
+                                            
+                                            <div class="form-group">
+                                              <label for="subject">Enter email subject</label>
+                                              <input type="text" class="form-control" name="subject" id="subject" placeholder="Subject" required>
+                                              <small class="form-text text-muted">Enter a subject of mail.</small>
+                                            </div>
+                                            
+                                           
+                                            <input type="hidden" name="myself">
+                                            <button type="submit" class="btn btn-primary btn-block mt-4">Submit</button>
+                                    </form>
+    
+    
+                            </div>
+                            <div class="tab-pane fade" id="v-pills-profile" role="tabpanel" aria-labelledby="v-pills-profile-tab">
+                                <form method="POST" enctype="multipart/form-data">
+                                  {% csrf_token %}
+                                  
+                                  <div class="form-group">
+                                      <label for="subject">Enter email subject</label>
+                                      <input type="text" class="form-control" name="subject" id="subject" placeholder="Subject" required>
+                                      <small class="form-text text-muted">Enter a subject of mail.</small>
+                                    </div>
+    
+                                  
+                                  <div class='file-input'>
+                                    <input type='file' name="txt_file" required>
+                                    <span class='button'>Choose</span>
+                                    <span class='label' style="color:black !important;" data-js-label>No file selected</label>
+                                  </div>
+                                  <small class="form-text text-muted">Choose a txt file you want to parse for searching e-mails.</small>
+    
+                                  <input type="hidden" name="sending_from_txt">
+                                  <button type="submit" class="btn btn-primary btn-block mt-4">Submit</button>
+                                  
+                              </form>
+                            </div>
+                            <div class="tab-pane fade" id="v-pills-config" aria-labelledby="v-pills-pconfig-tab">
+                                <div class="row">
+                                  <div class="col-6">
+                                    <h2>Change your config</h2>
+                                      <form method="POST">
+                                          {% csrf_token %}
+                                          <div class="form-group">
+                                              <input type="text" name="host" class="form-control" placeholder="smtp.gmail.com" required>
+                                              <small>Enter email host.</small>
+                                          </div>
+                                          <div class="form-group">
+                                            <input type="text" name="username" class="form-control" required placeholder="example@gmail.com">
+                                            <small>Enter your username.</small>
+                                          </div>
+                                          <div class="form-group">
+                                            <input type="password" name="password" class="form-control" required placeholder="Password">
+                                            <small>Enter your mail password.</small>
+                                          </div>
+                                          <div class="form-group">
+                                            <input type="number" class="form-control" name="port" required placeholder="587">
+                                            <small>Enter your mail port.</small>
+                                          </div>
+                                          <div class="row">
+                                            <div class="col-6">
+                                                <div class="form-check">
+                                                    <input class="form-check-input" type="checkbox" name="use_tls" id="defaultCheck1">
+                                                    <label class="form-check-label" for="defaultCheck1">
+                                                      Will we use TLS?
+                                                    </label>
+                                                  </div>
+                                            </div>
+                                            <div class="col-6">
+                                                <div class="form-check">
+                                                    <input class="form-check-input" type="checkbox" name="use_ssl" id="defaultCheck2">
+                                                    <label class="form-check-label" for="defaultCheck2">
+                                                      Will we use SSL?
+                                                    </label>
+                                                  </div>
+                                            </div>
+                                          </div>
+                                    
+                                            <input type="hidden" name="config">
+                                            <button class="btn btn-block btn-primary mt-4" type="submit">Submit</button>
+                                        </form>
+                                  </div>
+                                  <div class="col-6">
+                                    <h2>Your config</h2>
+                                    <ul class="list-group">
+                                        <li class="list-group-item"><strong>Email host: </strong>{{request.user.mail_host}}</li>                                        
+                                        <li class="list-group-item"><strong>Mail username: </strong>{{request.user.mail_username}}</li>
+                                        <li class="list-group-item"><strong>Mail port: </strong>{{request.user.mail_port}}</li>
+                                        <li class="list-group-item"><strong>Mail password: </strong><span id="mail-password" data-password='{{request.user.mail_password}}'></span> <i class="fas fa-eye" id="eye" style="float: right;color:chocolate"></i></li>
+                                        <li class="list-group-item"><strong>Do you use TLS: </strong>{{request.user.use_tls}}</li>
+                                        <li class="list-group-item"><strong>Do you use SSL: </strong>{{request.user.use_ssl}}</li>
+                                      </ul>  
+                                  </div>
+                                </div>                                
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                </div>
+                <div class="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">
+                  
+                  <div class="row mt-4">
+                    <div class="col-3">
+                      <div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
+                        <a class="nav-link active" id="v-pills-home-tab" data-toggle="pill" href="#v-pills-phone_one" role="tab" aria-controls="v-pills-phone_one" aria-selected="true">One number</a>
+                        <a class="nav-link" id="v-pills-profile-tab" data-toggle="pill" href="#v-pills-phone_txt" role="tab" aria-controls="v-pills-phone_txt" aria-selected="false">From txt file</a>
+                        <a class="nav-link" id="v-pills-messages-tab" data-toggle="pill" href="#v-pills-phone_config" role="tab" aria-controls="v-pills-phone_config" aria-selected="false">Config</a>
+                      </div>
+                    </div>
+                    <div class="col-9">
+                      <div class="tab-content" id="v-pills-tabContent">
+                        <div class="tab-pane fade show active" id="v-pills-phone_one" role="tabpanel" aria-labelledby="v-pills-phone_one-tab">
+                          <form method='POST'>
+                            {% csrf_token %}
+                            <input type="hidden" name="one_number_send">
+                            <div class="from-group">
+                              <label for="phone_number">Phone number</label>
+                              <input type="text" name='phone_number' class="form-control" placeholder="Phone">
+                              <small>Enter phone number you want to send message.</small>
+                            </div>
+                            <div class="form-group mt-2">
+                              <label for="one_message_body">Message</label>
+                              <input type="text" class="form-control" name="one_message_body" placeholder="Message">
+                              <small>Enter message you want to send.</small>
+                            </div>  
+                            <button type="submit" class="btn btn-block btn-primary">Submit</button>
+                          </form>
+                        </div>
+                        <div class="tab-pane fade" id="v-pills-phone_txt" role="tabpanel" aria-labelledby="v-pills-phone_txt-tab">
+                            <form method='POST' enctype="multipart/form-data">
+                                {% csrf_token %}
+                                <input type="hidden" name="txt_number_send">
+                                
+                                <div class="form-group mt-2">
+                                  <label for="one_message_body">Message</label>
+                                  <input type="text" class="form-control" name="one_message_body" placeholder="Message">
+                                  <small>Enter message you want to send.</small>
+                                </div> 
+                                <div class='file-input'>
+                                    <input type='file' name="txt_file" required>
+                                    <span class='button'>Choose</span>
+                                    <span class='label' style="color:black !important;" data-js-label>No file selected</label>
+                                  </div>
+                                  <small class="form-text text-muted">Choose a txt file you want to parse for searching phone numbers.</small>
+     
+                                <button type="submit" class="btn btn-block btn-primary mt-2">Submit</button>
+                              </form>
+                        </div>
+                        <div class="tab-pane fade" id="v-pills-phone_config" role="tabpanel" aria-labelledby="v-pills-phone_config-tab">
+
+                            <div class="row">
+                                <div class="col-6">
+                                  <h2>Change your config</h2>
+                                    <form method="POST">
+                                        {% csrf_token %}
+                                        <div class="form-group">
+                                            <input type="text" name="twilio_sid" class="form-control" placeholder="account_sid" required>
+                                            <small>Enter your twilio account_sid.</small>
+                                        </div>
+                                        <div class="form-group">
+                                          <input type="text" name="twilio_token" class="form-control" required placeholder="auth_token">
+                                          <small>Enter your twilio auth_token.</small>
+                                        </div>
+                                        <div class="form-group">
+                                          <input type="text" name="twilio_number" class="form-control" required placeholder="number">
+                                          <small>Enter your new twilio number</small>
+                                        </div>
+                                        
+                                  
+                                          <input type="hidden" name="twilio_config">
+                                          <button class="btn btn-block btn-primary mt-4" type="submit">Submit</button>
+                                      </form>
+                                </div>
+                                <div class="col-6">
+                                  <h2>Your config</h2>
+                                  <ul class="list-group">
+                                      <li class="list-group-item"><strong>Account sid: </strong>{{request.user.twilio_account_sid}}</li>                                        
+                                      <li class="list-group-item"><strong>Auth token: </strong>{{request.user.twilio_auth_token}}</li>
+                                      <li class="list-group-item"><strong>Phone number: </strong>{{request.user.twilio_phone_number}}</li>
+                                      </ul>  
+                                </div>
+                              </div>
+
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+
+                </div>
+                
+                <div class="tab-pane fade" id="nav-templates" role="tabpanel" aria-labelledby="nav-template-tab">
+                  
+                  <form method="POST" class="mt-4" enctype="multipart/form-data" id="upload_html_file_form">
+                    {% csrf_token %}
+                    <input type="hidden" name="html_file_download">
+
+                    <div class='file-input'>
+                      <input type='file' name="html_file" id='upload_html_file'>
+                      <span class='button'>Choose</span>
+                      <span class='label' style="color:black !important;" data-js-label>No file selected</label>
+                    </div>
+                    <small class="form-text text-muted">Choose a HTML file you want to send.</small>
+
+
+                  </form>
+
+                  <div class="row mt-4">
+                    {% for template in all_user_templates %}
+                    <div class="col-sm-12 col-12 col-lg-3 col-xl-3 col-md-12" style="text-align: center;">
+                      <div class="card template_change_card" style='{% if template.is_active == True%}border:3px solid #007bff{%endif%}'>
+                        <div class="card-body">
+                          <form class="change_active_template_form" method="POST">
+                            {% csrf_token %}
+                            <input type="hidden" name="template_url" value="{{template.url}}">
+                            <input type="hidden" name="template_id" value='{{template.id}}'>
+                            <h5 class="card-title">{{template.filename}}</h5>
+                          </form>
+                          <button class="btn btn-primary btn-block preview-button" id='preview_btn' data-toggle="modal" data-target=".template-preview-{{template.id}}">Preview</button>
+                        </div>
+                      </div>
+                    </div>
+                    {% endfor %}
+                  </div>
+
+                </div>
+                  
+              </div>
+      </div>
+
+
+      <!-- modal block start  -->
+      {% for template in templates_to_render %}
+      <div class="modal fade bd-example-modal-xl template-preview" tabindex="-1" role="dialog" aria-labelledby="myExtraLargeModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-xl" role="document">
+          <div class="modal-content template-preview-content">
+            {{template}}
+          </div>
+        </div>
+      </div>
+      {% endfor %}
+      <!-- modal block end -->
+
+      <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+      <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+      <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+
+      <script src="../static/js/script.js"></script>
+
+</body>
+</html>
