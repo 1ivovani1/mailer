@@ -9,14 +9,71 @@ template_change_cards.forEach((item,index) => {
     })
 })
 
+const file_dowload_wrapper = document.querySelector('#upload_html_file_form'),
+      filename_hidden = document.querySelector('#dowload_file_name'),
+      file_label = file_dowload_wrapper.querySelector('.label'),
+      uploading_file = document.getElementById('upload_html_file');
+
+const all_forms = document.querySelectorAll('.sending-form');
 
 
-const uploading_file = document.getElementById('upload_html_file'),
-              uploading_file_form = document.getElementById('upload_html_file_form');
+      all_forms.forEach(item => {
+        const inputs = item.querySelectorAll('input');
+        item.addEventListener('submit',(e) => {
+          e.preventDefault();
+          const data = new FormData(item);
+          let body = {};
+          data.forEach((val,key) => {
+            body[key] = val;
+          })
+          let csrftoken = getCookie('csrftoken');
+          postData(body,csrftoken)
+          .then((response)=>{
+            console.log(response);
+            if (response.status !== 200) {
+              throw new Error("I can't connect to the server...")
+            }
+            
+            inputs.forEach(item => item.value = '');
+          })
+          .catch(error => {
+            console.error(error);
+            inputs.forEach(item => item.value = '');
+            
+          })
+         })
+      })
 
-        uploading_file.addEventListener('change',() => {
-            uploading_file_form.submit();
+
+     function getCookie(name) {
+      let cookieValue = null;
+      if (document.cookie && document.cookie !== '') {
+          let cookies = document.cookie.split(';');
+          for (var i = 0; i < cookies.length; i++) {
+              var cookie = cookies[i].trim();
+              if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                  cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                  break;
+              }
+          }
+      }
+      return cookieValue;
+  }
+    
+
+      const postData = (body,csrf) => {
+        return fetch('/',{
+          method:'POST',
+          headers:{
+            'Content-Type':'application/JSON',
+            'X-CSRFToken':csrf
+          },
+          body:JSON.stringify(body)
         })
+      }
+      
+      
+
 
         const all_preview_modals = document.querySelectorAll('.template-preview'),
               all_preview_buttons = document.querySelectorAll('.preview-button');
@@ -54,6 +111,13 @@ const uploading_file = document.getElementById('upload_html_file'),
             var value = fileInput.value.replace(/^.*[\\\/]/, '')
             el.className += ' -chosen'
             label.innerText = value
+            console.log(filename_hidden.value);
+            
+            if(filename_hidden.value != ''){
+              filename_hidden.value = file_label.textContent
+              file_dowload_wrapper.submit()
+            }
+
           }
         }
 

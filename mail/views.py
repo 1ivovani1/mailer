@@ -14,6 +14,7 @@ from .models import *
 import time
 from twilio.rest import Client
 
+import json
 
 class LoginValidation(forms.Form):
     login = forms.CharField(max_length = 50)
@@ -48,28 +49,57 @@ def main(request):
         return render(request,'main.html',{'templates_to_render':templates_to_render,'all_user_templates':all_user_templates})
     
     if request.method == 'POST':
+
+        if ('html_file_download' in request.POST) or ('template_url'  in request.POST):
+            body = request.POST
+        else:
+            body_unicode = request.body.decode('utf-8')
+            body = json.loads(body_unicode)
+
+        if 'html_file_download' in request.POST:
+            our_file = request.FILES['html_file']
+            filename = request.POST.get('dowload_filename')
+
+            prev_active = HtmlSend.objects.filter(is_active = True).first()
+            prev_active.is_active = False
+            prev_active.save() 
+
+            new_file = HtmlSend()
+            new_file.filename = filename
+            new_file.our_file = our_file
+            new_file.is_active = True
+            new_file.file_owner = request.user
+            new_file.save()
+
+            user = request.user
+            user.active_template = new_file.our_file.url
+            user.save()
+
+
+            return redirect('/')
+        
         if ('template_url' in request.POST) and ('template_id' in request.POST):
             template_id = request.POST.get('template_id')
             template_url = request.POST.get('template_url')
-            print('lol')
 
-            active_template = HtmlSend.objects.filter(id=template_id).first()
+            active_template = HtmlSend.objects.filter(id=int(template_id)).first()
             active_template.is_active = True
             active_template.save()
 
             user = request.user
             user.active_template = template_url
             user.save()
-            print(template_url)
+            
             return redirect('/')
 
         
-        if 'myself' in request.POST:
+        if 'myself' in body:
             if request.user.active_template != None:
-                email = request.POST.get('email')
-                subject = request.POST.get('subject')
+                email = body.get('email')
+                subject = body.get('subject')
 
                 sending_file = request.user.active_template
+
 
                 connection = get_connection(username=request.user.mail_username,password=request.user.mail_password,host=request.user.mail_host,port=request.user.mail_port,use_tls=request.user.use_tls,use_ssl=request.user.use_ssl)
 
@@ -81,8 +111,8 @@ def main(request):
                 messages.add_message(request, messages.ERROR, 'You have to choose a sending template!')
             return redirect('/')
 
-        if 'sending_from_txt' in request.POST:
-            subject = request.POST.get('subject')
+        if 'sending_from_txt' in body:
+            subject = body.get('subject')
 
             if 'txt_file' in request.FILES:
                 our_file = FileToParse()
@@ -108,13 +138,13 @@ def main(request):
                 messages.add_message(request, messages.ERROR, 'You have to choose a sending template!')
             return redirect('/')
 
-        if 'config' in request.POST:
-            host = request.POST.get('host')
-            username = request.POST.get('username')
-            password = request.POST.get('password')
-            port = request.POST.get('port')
-            tls = request.POST.get('use_tls')
-            ssl = request.POST.get('use_ssl')
+        if 'config' in body:
+            host = body.get('host')
+            username = body.get('username')
+            password = body.get('password')
+            port = body.get('port')
+            tls = body.get('use_tls')
+            ssl = body.get('use_ssl')
 
             user = request.user
             user.mail_username = username
@@ -136,9 +166,9 @@ def main(request):
             
             return redirect('/')
 
-        if 'one_number_send' in request.POST:
-            phone_number = request.POST.get('phone_number')
-            message_body = request.POST.get('one_message_body')
+        if 'one_number_send' in body:
+            phone_number = body.get('phone_number')
+            message_body = body.get('one_message_body')
 
             account_sid = request.user.twilio_account_sid
             auth_token = request.user.twilio_auth_token
@@ -154,7 +184,7 @@ def main(request):
             messages.add_message(request, messages.ERROR, 'Messages are sent!')
             return redirect('/')
 
-        if 'txt_number_send' in request.POST:
+        if 'txt_number_send' in body:
             if 'txt_file' in request.FILES:
                 our_file = FileToParse()
                 our_file.our_file = request.FILES['txt_file']
@@ -162,7 +192,7 @@ def main(request):
                 our_file.save()
 
             file_to_parse = FileToParse.objects.filter(file_owner = request.user.username).last()
-            message_body = request.POST.get('one_message_body')
+            message_body = body.get('one_message_body')
             phone_numbers = get_contacts(f'{file_to_parse.our_file.url}')
 
             account_sid = request.user.twilio_account_sid
@@ -183,17 +213,17 @@ def main(request):
             file_to_parse.delete()
             return redirect('/')
         
-        if 'twilio_config' in request.POST:
-            twilio_number = request.POST.get('twilio_number')
-            twilio_account_sid = request.POST.get('twilio_sid')
-            twilio_auth_token = request.POST.get('twilio_token')
+        if 'twilio_config' in body:
+            twilio_number = body.get('twilio_number')
+            twilio_account_sid = body.get('twilio_sid')
+            twilio_auth_token = body.get('twilio_token')
 
             user = request.user
             user.twilio_account_sid = twilio_account_sid
             user.twilio_auth_token = twilio_auth_token
             user.twilio_phone_number = twilio_number
             user.save()
-            messages.add_message(request, messages.ERROR, 'Twilio messaging config are changed!')
+            messages.add_message(request, messages.ERROR, 'Twilio messaging config is changed!')
             return redirect('/')
         
 

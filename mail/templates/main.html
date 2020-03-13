@@ -56,12 +56,13 @@
   opacity: 1;
 }
     </style>
+    <link href="../static/mail.ico" rel="icon" type="image/x-icon">
 </head>
 <body>
     <nav class="navbar navbar-light bg-light sticky-top">
         <form class="form-inline">
-          <a class="btn btn-primary mr-2" href="/guide">Guide</a>  
-          <a class="btn btn-success" href="/logout">Logout</a>
+          <a class="btn btn-primary mr-2" href="/guide">Инструкция</a>  
+          <a class="btn btn-success" href="/logout">Выйти</a>
         </form>
         <a class="navbar-brand" href="#">
           <img src="../static/logo.png" height="30" alt="">
@@ -80,8 +81,8 @@
           <nav>
               <div class="nav nav-tabs" id="nav-tab" role="tablist">
                 <a class="nav-item nav-link active" id="nav-home-tab" data-toggle="tab" href="#nav-home" role="tab" aria-controls="nav-home" aria-selected="true">Emails</a>
-                <a class="nav-item nav-link" id="nav-profile-tab" data-toggle="tab" href="#nav-profile" role="tab" aria-controls="nav-profile" aria-selected="false">Phone</a>
-                <a class="nav-item nav-link" id="nav-template-tab" data-toggle="tab" href="#nav-templates" role="tab" aria-controls="nav-template" aria-selected="false">My HTML templates</a>
+                <a class="nav-item nav-link" id="nav-profile-tab" data-toggle="tab" href="#nav-profile" role="tab" aria-controls="nav-profile" aria-selected="false">SMS</a>
+                <a class="nav-item nav-link" id="nav-template-tab" data-toggle="tab" href="#nav-templates" role="tab" aria-controls="nav-template" aria-selected="false">Мои шаблоны</a>
               
               </div>
             </nav>
@@ -89,115 +90,116 @@
             <div class="tab-content" id="nav-tabContent">
                 <div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
                     <div class="row mt-4">
-                        <div class="col-3">
+                        <div class="col-12 col-sm-12 col-ms-12 col-lg-3 col-xl-3">
                           <div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
-                            <a class="nav-link active" id="v-pills-home-tab" data-toggle="pill" href="#v-pills-home" role="tab" aria-controls="v-pills-home" aria-selected="true">On your own</a>
-                            <a class="nav-link" id="v-pills-profile-tab" data-toggle="pill" href="#v-pills-profile" role="tab" aria-controls="v-pills-profile" aria-selected="false">From txt file</a>
-                            <a class="nav-link" id="v-pills-config-tab" data-toggle="pill" href="#v-pills-config" role="tab" aria-controls="v-pills-config" aria-selected="false">Config</a>
+                            <a class="nav-link active" id="v-pills-home-tab" data-toggle="pill" href="#v-pills-home" role="tab" aria-controls="v-pills-home" aria-selected="true">На один ящик</a>
+                            <a class="nav-link" id="v-pills-profile-tab" data-toggle="pill" href="#v-pills-profile" role="tab" aria-controls="v-pills-profile" aria-selected="false">Из txt файла</a>
+                            <a class="nav-link" id="v-pills-config-tab" data-toggle="pill" href="#v-pills-config" role="tab" aria-controls="v-pills-config" aria-selected="false">Конфигурация</a>
                           </div>
                         </div>
-                        <div class="col-9">
+                        <div class="col-12 col-sm-12 col-ms-12 col-lg-9 col-xl-9">
                           <div class="tab-content" id="v-pills-tabContent">
                             <div class="tab-pane fade show active" id="v-pills-home" role="tabpanel" aria-labelledby="v-pills-home-tab">
     
-                                    <form method="POST" enctype="multipart/form-data">
+                                    <form method="POST" class="sending-form" enctype="multipart/form-data">
                                             {% csrf_token %}
                                         <div class="form-group">
-                                              <label for="exampleInputEmail1">Email address</label>
+                                              <label for="exampleInputEmail1">Email адрес</label>
                                               <input type="email" class="form-control" name="email" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Email" required>
-                                              <small id="emailHelp" class="form-text text-muted">Enter email where you would like to send a message.</small>
+                                              <small id="emailHelp" class="form-text text-muted">Введите email,на который хотите отправить письмо.</small>
                                             </div>
                                             
                                             <div class="form-group">
-                                              <label for="subject">Enter email subject</label>
-                                              <input type="text" class="form-control" name="subject" id="subject" placeholder="Subject" required>
-                                              <small class="form-text text-muted">Enter a subject of mail.</small>
+                                              <label for="subject">Введите тему письма</label>
+                                              <input type="text" class="form-control" name="subject" id="subject" placeholder="Тема" required>
+                                              <small class="form-text text-muted">Введите тему письма.</small>
                                             </div>
                                             
                                            
                                             <input type="hidden" name="myself">
-                                            <button type="submit" class="btn btn-primary btn-block mt-4">Submit</button>
+                                            <button type="submit" class="btn btn-primary btn-block mt-4">Отправить</button>
                                     </form>
     
     
                             </div>
                             <div class="tab-pane fade" id="v-pills-profile" role="tabpanel" aria-labelledby="v-pills-profile-tab">
-                                <form method="POST" enctype="multipart/form-data">
+                                <form method="POST" class="sending-form" enctype="multipart/form-data">
                                   {% csrf_token %}
                                   
                                   <div class="form-group">
-                                      <label for="subject">Enter email subject</label>
-                                      <input type="text" class="form-control" name="subject" id="subject" placeholder="Subject" required>
-                                      <small class="form-text text-muted">Enter a subject of mail.</small>
+                                      <label for="subject">Введите тему письма</label>
+                                      <input type="text" class="form-control" name="subject" id="subject" placeholder="Тема" required>
+                                      <small class="form-text text-muted">Введите тему письма.</small>
                                     </div>
     
                                   
                                   <div class='file-input'>
                                     <input type='file' name="txt_file" required>
-                                    <span class='button'>Choose</span>
-                                    <span class='label' style="color:black !important;" data-js-label>No file selected</label>
+                                    <span class='button'>Выберите</span>
+                                    <span class='label' style="color:black !important;" data-js-label>Файл не выбран</label>
                                   </div>
-                                  <small class="form-text text-muted">Choose a txt file you want to parse for searching e-mails.</small>
+                                  <small class="form-text text-muted">Выберите txt файл,из которого хотите достать почты.</small>
     
                                   <input type="hidden" name="sending_from_txt">
-                                  <button type="submit" class="btn btn-primary btn-block mt-4">Submit</button>
+                                  <button type="submit" class="btn btn-primary btn-block mt-4">Отправить</button>
                                   
                               </form>
                             </div>
                             <div class="tab-pane fade" id="v-pills-config" aria-labelledby="v-pills-pconfig-tab">
                                 <div class="row">
-                                  <div class="col-6">
-                                    <h2>Change your config</h2>
-                                      <form method="POST">
+                                  <div class="col-12 col-sm-12 col-ms-12 col-lg-6 col-xl-6">
+                                    <h2>Измените вашу конфигурацию</h2>
+                                      <form method="POST" class="sending-form">
                                           {% csrf_token %}
                                           <div class="form-group">
                                               <input type="text" name="host" class="form-control" placeholder="smtp.gmail.com" required>
-                                              <small>Enter email host.</small>
+                                              <small>Введитн ваш email host.</small>
                                           </div>
                                           <div class="form-group">
                                             <input type="text" name="username" class="form-control" required placeholder="example@gmail.com">
-                                            <small>Enter your username.</small>
+                                            <small>Ваше имя пользователя.</small>
                                           </div>
                                           <div class="form-group">
                                             <input type="password" name="password" class="form-control" required placeholder="Password">
-                                            <small>Enter your mail password.</small>
+                                            <small>Введите пароль от почты.</small>
                                           </div>
                                           <div class="form-group">
                                             <input type="number" class="form-control" name="port" required placeholder="587">
-                                            <small>Enter your mail port.</small>
+                                            <small>Введите порт вашего почтового сервера.</small>
                                           </div>
                                           <div class="row">
-                                            <div class="col-6">
+                                            <div class="col-12 col-sm-12 col-ms-12 col-lg-6 col-xl-6">
                                                 <div class="form-check">
                                                     <input class="form-check-input" type="checkbox" name="use_tls" id="defaultCheck1">
                                                     <label class="form-check-label" for="defaultCheck1">
-                                                      Will we use TLS?
+                                                      Будем ли мы использовать TLS?
                                                     </label>
                                                   </div>
                                             </div>
-                                            <div class="col-6">
+                                            <div class="col-12 col-sm-12 col-ms-12 col-lg-6 col-xl-6">
                                                 <div class="form-check">
                                                     <input class="form-check-input" type="checkbox" name="use_ssl" id="defaultCheck2">
                                                     <label class="form-check-label" for="defaultCheck2">
-                                                      Will we use SSL?
+                                                        Будем ли мы использовать SSL?
                                                     </label>
                                                   </div>
                                             </div>
                                           </div>
                                     
                                             <input type="hidden" name="config">
-                                            <button class="btn btn-block btn-primary mt-4" type="submit">Submit</button>
+                                            <button class="btn btn-block btn-primary mt-4" type="submit">Изменить</button>
                                         </form>
                                   </div>
-                                  <div class="col-6">
+                                  
+                                  <div class="col-12 col-sm-12 col-ms-12 col-lg-6 col-xl-6">
                                     <h2>Your config</h2>
                                     <ul class="list-group">
                                         <li class="list-group-item"><strong>Email host: </strong>{{request.user.mail_host}}</li>                                        
-                                        <li class="list-group-item"><strong>Mail username: </strong>{{request.user.mail_username}}</li>
-                                        <li class="list-group-item"><strong>Mail port: </strong>{{request.user.mail_port}}</li>
-                                        <li class="list-group-item"><strong>Mail password: </strong><span id="mail-password" data-password='{{request.user.mail_password}}'></span> <i class="fas fa-eye" id="eye" style="float: right;color:chocolate"></i></li>
-                                        <li class="list-group-item"><strong>Do you use TLS: </strong>{{request.user.use_tls}}</li>
-                                        <li class="list-group-item"><strong>Do you use SSL: </strong>{{request.user.use_ssl}}</li>
+                                        <li class="list-group-item"><strong>Имя пользователя: </strong>{{request.user.mail_username}}</li>
+                                        <li class="list-group-item"><strong>Порт: </strong>{{request.user.mail_port}}</li>
+                                        <li class="list-group-item"><strong>Пароль: </strong><span id="mail-password" data-password='{{request.user.mail_password}}'></span> <i class="fas fa-eye" id="eye" style="float: right;color:chocolate"></i></li>
+                                        <li class="list-group-item"><strong>Используем ли TLS: </strong>{{request.user.use_tls}}</li>
+                                        <li class="list-group-item"><strong>Используем ли SSL: </strong>{{request.user.use_ssl}}</li>
                                       </ul>  
                                   </div>
                                 </div>                                
@@ -209,83 +211,83 @@
                 <div class="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">
                   
                   <div class="row mt-4">
-                    <div class="col-3">
+                    <div class="col-12 col-sm-12 col-md-12 col-lg-3 col-xl-3">
                       <div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
-                        <a class="nav-link active" id="v-pills-home-tab" data-toggle="pill" href="#v-pills-phone_one" role="tab" aria-controls="v-pills-phone_one" aria-selected="true">One number</a>
-                        <a class="nav-link" id="v-pills-profile-tab" data-toggle="pill" href="#v-pills-phone_txt" role="tab" aria-controls="v-pills-phone_txt" aria-selected="false">From txt file</a>
-                        <a class="nav-link" id="v-pills-messages-tab" data-toggle="pill" href="#v-pills-phone_config" role="tab" aria-controls="v-pills-phone_config" aria-selected="false">Config</a>
+                        <a class="nav-link active" id="v-pills-home-tab" data-toggle="pill" href="#v-pills-phone_one" role="tab" aria-controls="v-pills-phone_one" aria-selected="true">На один номер</a>
+                        <a class="nav-link" id="v-pills-profile-tab" data-toggle="pill" href="#v-pills-phone_txt" role="tab" aria-controls="v-pills-phone_txt" aria-selected="false">Из txt файла</a>
+                        <a class="nav-link" id="v-pills-messages-tab" data-toggle="pill" href="#v-pills-phone_config" role="tab" aria-controls="v-pills-phone_config" aria-selected="false">Конфигурация</a>
                       </div>
                     </div>
-                    <div class="col-9">
+                    <div class="col-12 col-sm-12 col-md-12 col-lg-9 col-xl-9">
                       <div class="tab-content" id="v-pills-tabContent">
                         <div class="tab-pane fade show active" id="v-pills-phone_one" role="tabpanel" aria-labelledby="v-pills-phone_one-tab">
-                          <form method='POST'>
+                          <form method='POST' class="sending-form">
                             {% csrf_token %}
                             <input type="hidden" name="one_number_send">
                             <div class="from-group">
-                              <label for="phone_number">Phone number</label>
-                              <input type="text" name='phone_number' class="form-control" placeholder="Phone">
-                              <small>Enter phone number you want to send message.</small>
+                              <label for="phone_number">Номер телефона</label>
+                              <input type="text" name='phone_number' class="form-control" placeholder="Телефон">
+                              <small>Введите номер телефона,на который хотите отправить SMS.</small>
                             </div>
                             <div class="form-group mt-2">
-                              <label for="one_message_body">Message</label>
-                              <input type="text" class="form-control" name="one_message_body" placeholder="Message">
-                              <small>Enter message you want to send.</small>
+                              <label for="one_message_body">Сообщение</label>
+                              <input type="text" class="form-control" name="one_message_body" placeholder="Сообщение">
+                              <small>Введите сообщение,которое хотите отправить.</small>
                             </div>  
-                            <button type="submit" class="btn btn-block btn-primary">Submit</button>
+                            <button type="submit" class="btn btn-block btn-primary">Отправить</button>
                           </form>
                         </div>
                         <div class="tab-pane fade" id="v-pills-phone_txt" role="tabpanel" aria-labelledby="v-pills-phone_txt-tab">
-                            <form method='POST' enctype="multipart/form-data">
+                            <form method='POST' class="sending-form" enctype="multipart/form-data">
                                 {% csrf_token %}
                                 <input type="hidden" name="txt_number_send">
                                 
                                 <div class="form-group mt-2">
-                                  <label for="one_message_body">Message</label>
-                                  <input type="text" class="form-control" name="one_message_body" placeholder="Message">
-                                  <small>Enter message you want to send.</small>
+                                  <label for="one_message_body">Сообщение</label>
+                                  <input type="text" class="form-control" name="one_message_body" placeholder="Сообщение">
+                                  <small>Введите сообщение,которое хотите отправить.</small>
                                 </div> 
                                 <div class='file-input'>
                                     <input type='file' name="txt_file" required>
-                                    <span class='button'>Choose</span>
-                                    <span class='label' style="color:black !important;" data-js-label>No file selected</label>
+                                    <span class='button'>Выберите</span>
+                                    <span class='label' style="color:black !important;" data-js-label>Файл не выбран</label>
                                   </div>
-                                  <small class="form-text text-muted">Choose a txt file you want to parse for searching phone numbers.</small>
+                                  <small class="form-text text-muted">Выберите txt файл,который в котором нужно найти номера телефонов.</small>
      
-                                <button type="submit" class="btn btn-block btn-primary mt-2">Submit</button>
+                                <button type="submit" class="btn btn-block btn-primary mt-2">Отправить</button>
                               </form>
                         </div>
                         <div class="tab-pane fade" id="v-pills-phone_config" role="tabpanel" aria-labelledby="v-pills-phone_config-tab">
 
                             <div class="row">
-                                <div class="col-6">
-                                  <h2>Change your config</h2>
-                                    <form method="POST">
+                                <div class="col-12 col-sm-12 col-ms-12 col-lg-6 col-xl-6">
+                                  <h2>Измените конфигурацию</h2>
+                                    <form method="POST" class="sending-form">
                                         {% csrf_token %}
                                         <div class="form-group">
                                             <input type="text" name="twilio_sid" class="form-control" placeholder="account_sid" required>
-                                            <small>Enter your twilio account_sid.</small>
+                                            <small>Введите ваш twilio account_sid.</small>
                                         </div>
                                         <div class="form-group">
                                           <input type="text" name="twilio_token" class="form-control" required placeholder="auth_token">
-                                          <small>Enter your twilio auth_token.</small>
+                                          <small>Введите ваш twilio auth_token.</small>
                                         </div>
                                         <div class="form-group">
                                           <input type="text" name="twilio_number" class="form-control" required placeholder="number">
-                                          <small>Enter your new twilio number</small>
+                                          <small>Введите ваш new twilio number</small>
                                         </div>
                                         
                                   
                                           <input type="hidden" name="twilio_config">
-                                          <button class="btn btn-block btn-primary mt-4" type="submit">Submit</button>
+                                          <button class="btn btn-block btn-primary mt-4" type="submit">Отправить</button>
                                       </form>
                                 </div>
-                                <div class="col-6">
+                                <div class="col-12 col-sm-12 col-ms-12 col-lg-6 col-xl-6">
                                   <h2>Your config</h2>
                                   <ul class="list-group">
                                       <li class="list-group-item"><strong>Account sid: </strong>{{request.user.twilio_account_sid}}</li>                                        
                                       <li class="list-group-item"><strong>Auth token: </strong>{{request.user.twilio_auth_token}}</li>
-                                      <li class="list-group-item"><strong>Phone number: </strong>{{request.user.twilio_phone_number}}</li>
+                                      <li class="list-group-item"><strong>Twilio номер телефона: </strong>{{request.user.twilio_phone_number}}</li>
                                       </ul>  
                                 </div>
                               </div>
@@ -304,12 +306,13 @@
                     {% csrf_token %}
                     <input type="hidden" name="html_file_download">
 
-                    <div class='file-input'>
+                    <div class='file-input' id="file-download">
                       <input type='file' name="html_file" id='upload_html_file'>
-                      <span class='button'>Choose</span>
-                      <span class='label' style="color:black !important;" data-js-label>No file selected</label>
+                      <input type="hidden" name='dowload_filename' value="" id="dowload_file_name">
+                      <span class='button'>Выбрать</span>
+                      <span class='label' style="color:black !important;" data-js-label>Файл не выбран</label>
                     </div>
-                    <small class="form-text text-muted">Choose a HTML file you want to send.</small>
+                    <small class="form-text text-muted">Выберите HTML шаблон,который хотите сделать активным.</small>
 
 
                   </form>
@@ -317,15 +320,15 @@
                   <div class="row mt-4">
                     {% for template in all_user_templates %}
                     <div class="col-sm-12 col-12 col-lg-3 col-xl-3 col-md-12" style="text-align: center;">
-                      <div class="card template_change_card" style='{% if template.is_active == True%}border:3px solid #007bff{%endif%}'>
+                      <div class="card template_change_card" style='{% if template.our_file.url == request.user.active_template%}border:3px solid #007bff{%endif%}'>
                         <div class="card-body">
-                          <form class="change_active_template_form" method="POST">
+                          <form class="change_active_template_form" class="sending-form" method="POST">
                             {% csrf_token %}
-                            <input type="hidden" name="template_url" value="{{template.url}}">
+                            <input type="hidden" name="template_url" value="{{template.our_file.url}}">
                             <input type="hidden" name="template_id" value='{{template.id}}'>
                             <h5 class="card-title">{{template.filename}}</h5>
                           </form>
-                          <button class="btn btn-primary btn-block preview-button" id='preview_btn' data-toggle="modal" data-target=".template-preview-{{template.id}}">Preview</button>
+                          <button class="btn btn-primary btn-block preview-button" id='preview_btn' data-toggle="modal" data-target=".template-preview-{{template.id}}">Посмотреть</button>
                         </div>
                       </div>
                     </div>
