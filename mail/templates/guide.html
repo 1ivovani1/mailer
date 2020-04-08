@@ -4,9 +4,94 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Guide</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.1/css/all.css"
+  integrity="sha384-gfdkjb5BdAXd+lj+gudLWI+BXq4IuLW5IT+brZEZsLFm++aCMlF1V92rMkPaX4PP" crossorigin="anonymous">  
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+   
+    <title>Инструкция</title>
 </head>
 <body>
-    
+
+        <nav class="navbar navbar-light bg-light sticky-top">
+                <form class="form-inline">
+                  <a class="btn btn-primary mr-2" href="/main">Главная</a>  
+                  <a class="btn btn-success" href="/logout">Выйти</a>
+                  {% if is_paid == False %}
+                  <a class="btn btn-danger ml-2" href="/buy_subscribe">Купить подписку</a>
+                  {% endif %}
+                </form>
+                <a class="navbar-brand" href="#">
+                  <img src="../static/images/logo.png" height="30" alt="">
+                </a>
+              </nav>
+
+        <div class="container mt-4">
+            <center> <h1><b>Инструкция по использования Mailer</b></h1></center>
+            
+            <div class="row mt-4">
+                <div class="col-12 col-sm-12 col-md-12 col-lg-6 col-xl-6">
+                    <p><b style="font-size:24px;">Одиночная рассылка</b> <br>
+                    1. Определитесь с тематикой вашего сообщения <br>
+                    2. Введите название email <br>
+                    3. Нажмите отправить <br>
+                    <img src="../static/images/1.png" class="d-block mt-2 border border-primary" style="width:100%;height:auto;" alt="">
+            </p>
+                </div>
+                <div class="col-12 col-sm-12 col-md-12 col-lg-6 col-xl-6">
+                        <p><b style="font-size:24px;">Массовая рассылка</b> <br>
+                            1. Определитесь с тематикой вашего сообщения <br>
+                            2. Загрузите txt файл,в котором данные храняться в формате Имя - Почта <br>
+                            3. Нажмите отправить
+                            <img src="../static/images/2.png" class="d-block mt-2 border border-primary" style="width:100%;height:auto;" alt="">
+                        </p>
+                </div>
+
+                <div class="col-12 col-sm-12 col-md-12 col-lg-6 col-xl-6">
+                        <p><b style="font-size:24px;">Изменение конфигурации</b> <br>
+                            1. Введите все данные,которые необходимы(Порт,Хост,Имя пользователя,Пароль,SSL,TLS) <br>
+                            2. Например,для Mail.ru(Хост=smtp.mail.ru,Порт=465,Логин,Пароль,Галочка у SSL) <br>
+                            3. Например,для Gmail(Хост=smtp.gmail.com,Порт=587,Логин,Пароль,Галочка у TLS) <br>
+                            4. Нажмите изменить
+                            <img src="../static/images/4.png" class="d-block mt-2 border border-primary" style="width:100%;height:auto;" alt="">
+                        </p>
+                </div>
+
+                <div class="col-12 col-sm-12 col-md-12 col-lg-6 col-xl-6">
+                        <p><b style="font-size:24px;">Выбор шаблона</b> <br>
+                            1. Загрузите шаблон <br>
+                            2. Вы можете посмотреть свой шаблон,нажав на конпку посмотреть <br>
+                            3. Выберите активный шаблон,который будете отсылать по email
+                            <br>
+                            <br>
+                            <br>
+                            <br>
+                            <br>
+                            <img src="../static/images/3.png" class="d-block mt-2 border border-primary" style="width:100%;height:auto;" alt="">
+                        </p>
+                </div>
+
+                <div class="col-12 col-sm-12 col-md-12 col-lg-6 col-xl-6">
+                        <p><b style="font-size:24px;">Как должен выглядеть txt файл загрузки</b> <br>
+                           
+                            <img src="../static/images/txt.png" class="d-block mt-2 border border-primary" style="width:100%;height:auto;" alt="">
+                        </p>
+                </div>
+
+            </div>
+            
+            <hr>
+            <div class="row">
+                    <div class="col-12 col-sm-12 col-md-12 col-lg-4 col-xl-4">
+                            <h3><b>Служба поддержки:</b></h3> <p>+7(909)799-03-05 <br>+7(909)780-09-76 <br> <span class="text-info">mailer_info@mail.ru </span></p>
+                    </div>
+            
+        </div>
+
+
+        <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>    
+
 </body>
 </html>

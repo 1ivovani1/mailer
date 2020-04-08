@@ -1,0 +1,540 @@
+body,html{
+    margin: 0;
+    padding: 0;
+    font-family: 'Noto Sans', ;
+    overflow-x:hidden; 
+}
+
+header{
+    width:100%; 
+    padding: 20px 10px;
+    z-index: 99999;
+}
+
+#layer-1{
+    width: 100%;
+    min-height: 794px;
+    background-size:cover;
+    position: relative;
+    padding:0 5%;
+}
+
+header .col-lg-3,header .col-lg-2{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 9999999;
+}
+
+.tire-img{
+    width: 30%;
+    height: auto;
+    position: absolute;
+    bottom: 50px;
+    right: 30px;
+    z-index: 99999;
+}
+#tire-img{
+    display:none;
+}
+
+#background-for-tire{
+    width: 453px;
+    height: 453px;
+    position: absolute;
+    bottom:-50px;
+    right:50px;
+    background: radial-gradient(50% 50% at 50% 50%, #FFFFFF 0%, rgba(130, 142, 214, 0) 100%);   
+}
+
+
+#main-info{
+    font-family: 'Noto Sans', ;
+    padding: 4% 5%;
+    width:70%;
+    color:white;
+}  
+
+.img-inside-top{
+    height: 30px;
+    width: 30px;
+    z-index: 999999;
+}
+.p-inside-top{
+    width: 100%;
+    z-index: 999999;
+    font-size:14px;
+    line-height:19px;
+    padding:0;
+    margin-top: 20px;
+}
+.main-top-row{
+    width: 80%;
+    z-index: 999999;
+}
+
+#layer-2{
+    width: 100%;
+    min-height: 100vh;
+    position: relative;
+    background: white;
+    padding: 5% 10%;
+}
+
+.form-layer-2{
+    margin-bottom: 10%;
+    width: 100%;
+    padding: 10% 5% 5px 0;
+    border:none;
+    outline:none;
+    font-size: 20px;
+    border-bottom:2px solid #DFDFDF;
+    transition: 0.5s;
+}
+
+.form-select{
+    margin-bottom: 10%;
+    width: 100%;
+    padding: 5% 5% 5% 0;
+    border:none;
+    outline:none;
+    font-size: 20px;
+    height: 40%;
+    transition: 0.5s;
+    background: #FFFFFF;
+    border-bottom:2px solid #DFDFDF;
+    height: 100%;
+    color:black;
+}
+
+.form-select-wrapper{
+    display: flex;
+    align-items: flex-end;
+    flex-direction: column;
+    justify-content: center;
+}
+
+
+.form-layer-2:focus{
+    border-bottom:2px solid #1869AB;
+}
+
+#layer-2 .col-12{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.form-button-2{
+    transition: 0.4s;
+}
+.form-button-2:hover{
+    opacity:0.8;
+}
+#layer-2-logo{
+    position: absolute;
+    width: 387px;
+    height: 187px;
+    right:0;
+    bottom:0;
+    background: url(../images/client-img/logo.png) center no-repeat;
+    background-size:contain; 
+    opacity:1;
+    opacity:0.1;
+    /* z-index: -2; */
+}
+
+#layer-3{
+    width: 100%;
+    min-height: 70vh;
+    position: relative;
+    background: #E6E6E6;
+    padding: 5%; 
+}
+
+.advantage-img{
+    height: auto;
+    max-width:100%;
+}
+
+.we-need-margin{
+    margin-top: 5%;
+}
+
+.we_need_flex .col-xl-8{
+    padding-left: 0;
+    padding-top:8%;
+
+}
+
+#layer-3-triangle{
+    position: absolute;
+    height: 150px;
+    width: 150px;
+    background: black;
+    transform: rotate(45deg);
+    top:calc(50% - 106px);
+    left:-120px;
+}
+
+#layer-4{
+    width: 100%;
+    height: 50vh;
+    position: relative;
+}
+
+#worker-list{
+    position: absolute;
+    right:0;
+    width:80%;  
+    margin-top: 5%;
+}
+
+.staff{
+    width: 100%;
+    position: relative;
+}
+
+.hh3{
+position: absolute;
+width: 30%;
+height: 132px;
+left: 110px;
+top:110px;
+font-family: 'Noto Sans';
+font-style: normal;
+font-weight: bold;
+font-size: 34px;
+line-height: 45px;
+color: black;
+}
+.form_button3{
+position: absolute;
+width: 30%;
+height: 99px;
+left: 110px;
+top:320px;
+background: #1971A8;
+box-shadow: 0px 7px 10px rgba(1, 112, 181, 0.25);
+border-radius: 5px;
+font-size: 28px;
+    color:#FFFFFF;
+}
+.img-1{
+position: absolute;
+left: 45%;
+top:130px;
+}
+
+.arrows-block{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: absolute;
+    right:15%;
+    top:300px;
+    
+}
+.arrows-block img{
+    height: 40px;
+    width: 40px;
+    z-index: 99999;
+}
+#right-arr-work{
+    transform: rotate(180deg);
+}
+
+#left-arr-work,#right-arr-work{
+    transition: 0.4s;
+}
+
+#left-arr-work:hover,#right-arr-work:hover{
+    opacity: 0.7;
+    cursor:pointer;
+}
+
+#layer-4-triangle{
+    transform: rotate(45deg);
+    height:200px;
+    width: 200px;
+    position: absolute;
+    background: black;
+    left:-141.5px;
+    bottom:-201.5px;
+    z-index: 999;
+}
+.nav-pills a{
+    color:black;
+}
+.nav-pills .nav-link.active, .nav-pills .show>.nav-link{
+    background: #1971A8;
+}
+
+#layer-5-triangle{
+    height: 300px;
+    width: 300px;
+    transform: rotate(45deg);
+    position: absolute;
+    top:-150px;
+    right:-150px;
+    background: #1971A8;
+}
+
+#layer-4-big-triangle{
+    background: #1971A8;
+    height: 60vh;
+    width: 35vw;
+    position: absolute;
+    transform: rotate(45deg);
+    right:-18vw;
+    top:calc(50% - 15vh);
+    z-index: 99999;
+}
+
+#layer-5{
+    width: 100%;
+    min-height: 80vh;
+    position: relative;
+    background: #E6E6E6;
+    padding: 0 10% 0 10%;
+    display: flex;
+    align-items: center;
+    justify-content: center;  
+}
+
+#layer-6{
+    width: 100%;
+    min-height: 100vh;
+    position: relative;
+    background: white;
+    padding: 5% 10%;
+}
+
+#layer-2 .col-12{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+
+
+.fa-question{
+    margin-right: 10px;
+}
+
+#answer{
+    height: 100%;
+}
+
+.tab-pane{
+    font-size:25px;
+}
+
+iframe{
+    width: 100%;
+    margin:0;
+}
+
+#footer{
+    background: rgb(38,38,38);
+    
+}
+
+.we_need_flex p {
+    color: #646464 !important;
+}
+
+
+  a:hover {
+    text-decoration: none
+  }
+  
+  a:visited {
+    text-decoration: none
+  }
+.we_need_flex img{
+    display: block;
+    border-radius:100%;
+    box-shadow: 0px 4px 10px rgba(25, 113, 168, 0.5);
+}
+  
+#layer-5-little-triangle{
+    height: 150px;
+    width: 150px;
+    position: absolute;
+    background: black;
+    transform: rotate(45deg);
+    left:-75px;
+    top:-75px;
+
+}
+
+.colorful-layer{
+    position: absolute;
+    top:0;
+    left:0;
+    right:0;
+    bottom:0;
+    background: linear-gradient(146.83deg, #252839 39.23%, #252839 97.46%);
+    z-index: -1;
+    opacity: 1;
+}
+
+#layer-6,#layer-2{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    min-height:70vh;
+}
+
+input::placeholder{
+    color:black;
+}
+
+
+#layer-6 form{
+    width:100% ;
+}
+
+form{
+    width: 75%;
+}
+
+@media screen and (max-width:1100px){
+    #background-for-tire,.tire-img{
+        display: none;
+    }
+
+    .we_need_flex .col-xl-8{
+        text-align:center;
+    }
+
+    .block-reversed-mobile{
+        width: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column-reverse;
+    }
+    
+    #layer-5-little-triangle{
+        display: none;
+    }
+    
+    #layer-5-triangle{
+        display: none;
+    }
+
+    .we_need_flex .col-lg-4{
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .advantage-img{
+        height: 40px;
+        width: 40px;
+    }
+    #accordion-two{
+        display: unset;
+    }
+
+    #xl-questions{
+        display: none;
+    }
+
+    #layer-4-big-triangle{
+        display: none;
+    }
+    
+    #worker_img{
+        margin-top: 30px;
+    }
+    #layer-5{
+        padding-bottom: 2rem;
+        padding-top: 10%;
+    }
+    #layer-4{
+        height:auto;
+        text-align: center;
+    }
+    .hh3{
+        width: 80%;
+        margin:10px 0;
+        height:auto;
+    }
+
+    h3{
+        font-weight:bolder;
+        
+    }
+
+    #layer-4-triangle{
+        display: none;
+    }
+    .arrows-block,.form_button3,.img-1,.hh3,.staff{
+        position: unset;
+
+    }
+    .form_button3{
+        width: 70%;
+    }
+    .staff{
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-direction: column;
+    }
+    .advantage-img{
+        padding-left: 25%;
+        padding-right: 25%;
+        height: 50%;
+         
+    }
+    
+    #layer-3-triangle{
+        display: none;
+    }
+
+    #layer-2-logo{
+        display: none;
+    }
+    .form-button-2{
+        margin-bottom: 30px;
+        padding: 10px !important;
+    }
+    #layer-1{
+        padding-bottom: 160px !important;
+    }
+    #main-bottom-btn{
+         width: 100% !important;
+    }
+    .card-info-pref{
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        
+    }
+    .main-top-row{
+        width: 100%;
+    }
+    .header__hide{
+        display: none !important;
+    }
+    #tire-img{
+        height: 20%;
+        width: 50%;   
+        position: absolute;
+        bottom:0;
+        right:-2%;
+        background:url(../images/client-img/tires12.png) center no-repeat;
+        background-size:contain;
+        z-index: 99999;
+        display: block;
+    }
+    #main-info{
+        width: 100%;
+        text-align: center;
+    }
+}

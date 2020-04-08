@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.1/css/all.css"
+  integrity="sha384-gfdkjb5BdAXd+lj+gudLWI+BXq4IuLW5IT+brZEZsLFm++aCMlF1V92rMkPaX4PP" crossorigin="anonymous">  
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+   
+    <style>
+
+        @media screen and (max-width:1100px){
+            .qr-btn{
+            padding-left: 0;
+            padding-right: 0 !important;
+            }
+
+            .buy-btn{
+                padding-right: 0;
+                margin-top: 10px;
+            }
+        }
+        
+
+    </style>
+
+    <title>Оформление подписки</title>
+</head>
+<body>
+
+    <nav class="navbar navbar-light bg-light sticky-top">
+        <form class="form-inline">
+            <a class="btn btn-info mr-2" href="/main">Главная</a>   
+            <a class="btn btn-info mr-2" href="/guide">Инструкция</a>  
+            <a class="btn btn-danger" href="/logout">Выйти</a>
+          
+        </form>
+        <a class="navbar-brand" href="#">
+          <img src="../static/logo.png" height="30" alt="">
+        </a>
+      </nav>
+
+
+      <div class="container-fluid mt-4">
+
+        <div class="pricing-header px-3 py-3 pt-md-5 pb-md-4 mx-auto text-center">
+            <h1 class="display-4">Тарифные планы <img style="height:60px;width:60px;" src="https://image.flaticon.com/icons/svg/506/506766.svg" alt=""> </h1>
+          </div>
+      
+          <div class="container">
+            <div class="card-deck mb-3 text-center">
+              <div class="card mb-4 box-shadow" style="padding-bottom:20px;">
+                <div class="card-header">
+                  <h4 class="my-0 font-weight-normal">Эконом</h4>
+                </div>
+                <div class="card-body">
+                  <h1 class="card-title pricing-card-title">15.599₽</h1>
+                  <ul class="list-unstyled mt-3 mb-4">
+                    <li>1000 SMS</li>
+                    <li>2000 email-s</li>
+                    <li>База данных клиентов на 50 человек</li>
+                  </ul>
+                </div>
+                
+                <center>
+                        <div class="row" style="width:80%;">
+                            <div class="col-12 col-sm-12 col-md-12 col-lg-6 col-xl-6 pr-1 qr-btn">
+                                <button  type="button" class="btn btn-lg btn-block btn-success" data-toggle="modal" data-target="#exampleModal1"><i class="fas fa-qrcode"></i></button>
+                            </div>
+                            <div class="col-12 col-sm-12 col-md-12 col-lg-6 col-xl-6 pl-0 buy-btn">
+                                    <a href="https://money.yandex.ru/to/410018707507727/15999" class="btn btn-lg btn-block btn-primary">Купить</a>                            
+                            </div>
+                        </div>
+                    </center>
+
+            </div>
+              <div class="card mb-4 box-shadow" style="padding-bottom:20px;">
+                <div class="card-header">
+                  <h4 class="my-0 font-weight-normal">Бизнес</h4>
+                </div>
+                <div class="card-body">
+                  <h1 class="card-title pricing-card-title">50.000₽</small></h1>
+                  <ul class="list-unstyled mt-3 mb-4">
+                    <li>5.000 SMS</li>
+                    <li>15.000 email</li>
+                    <li>База данных клиентов на 100 человек</li>
+                    <li>Автоматическая настройка системы</li>
+                  </ul>
+                </div>
+                
+                <center>
+                        <div class="row" style="width:80%;">
+                            <div class="col-12 col-sm-12 col-md-12 col-lg-6 col-xl-6 pr-1 qr-btn">
+                                <button  type="button" class="btn btn-lg btn-block btn-success" data-toggle="modal" data-target="#exampleModal2"><i class="fas fa-qrcode"></i></button>
+                            </div>
+                            <div class="col-12 col-sm-12 col-md-12 col-lg-6 col-xl-6 pl-0 buy-btn">
+                                    <a href="https://money.yandex.ru/to/410018707507727/50000" class="btn btn-lg btn-block btn-primary">Купить</a>                            
+                            </div>
+                        </div>
+                    </center>
+
+            </div>
+              <div class="card mb-4 box-shadow" style="padding-bottom:20px;">
+                <div class="card-header">
+                  <h4 class="my-0 font-weight-normal">Премиум</h4>
+                </div>
+                <div class="card-body">
+                  <h1 class="card-title pricing-card-title">110.000₽</h1>
+                  <ul class="list-unstyled mt-3 mb-4">
+                        <li>15.000 SMS</li>
+                        <li>∞ email</li>
+                        <li>База данных клиентов на 250 человек</li>
+                        <li>Автоматическая настройка системы</li>
+                  </ul>
+                </div>
+                <center>
+                    <div class="row" style="width:80%;">
+                        <div class="col-12 col-sm-12 col-md-12 col-lg-6 col-xl-6 pr-1 qr-btn">
+                            <button  type="button" class="btn btn-lg btn-block btn-success" data-toggle="modal" data-target="#exampleModal3"><i class="fas fa-qrcode"></i></button>
+                        </div>
+                        <div class="col-12 col-sm-12 col-md-12 col-lg-6 col-xl-6 pl-0 buy-btn">
+                                <a href="https://money.yandex.ru/to/410018707507727/110000" class="btn btn-lg btn-block btn-primary">Купить</a>                            
+                        </div>
+                    </div>
+                </center>
+
+            </div>
+            </div>
+            
+            <hr>
+            <div class="row">
+                <div class="col-12 col-sm-12 col-md-12 col-lg-4 col-xl-4">
+                        <h3><b>Служба поддержки:</b></h3> <p>+7(909)799-03-05 <br>+7(909)780-09-76 <br> <span class="text-info">mailer_info@mail.ru </span></p>
+                </div>
+
+                <div class="col-12 col-sm-12 col-md-12 col-lg-4 col-xl-4">
+                    <h3><b>Справка:</b></h3> 
+                    <p><button type="button" class="btn btn-success"><i class="fas fa-qrcode"></i></button> - означает,что вы оплату производите с помощью сканирования QR кода.</p>       
+                    <p><button type="button" class="btn btn-primary">Купить</button> - кнопка для обычной оплаты.</p>
+                </div>
+
+                <div class="col-12 col-sm-12 col-md-12 col-lg-4 col-xl-4">
+                        <h3><b>Важная информация:</b></h3> 
+                        <button class="btn btn-outline-info" data-toggle="modal" data-target="#exampleModal4">Как происходит оплата?</button>
+                </div>
+
+            </div>
+                 
+
+           
+      </div>
+
+      <div class="modal fade" id="exampleModal4" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title" id="exampleModalLabel">Как происходит оплата?</h5>
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>
+                <div class="modal-body">
+                        <p>
+                                Для начала определитесь с видом оплаты. <br>  <br>
+                                1. Оплата по QR коду <br>
+                                2. Оплата по переводу <br> <br>
+                                После того как вы определись с типом оплаты , скопируйте QR код или нажмите на кнопку ‘’Купить‘’. <br>
+                                Затем в комментариях введите ваш логин,чтобы бот смог активировать услугу. <br> <br>
+                                В течении 15 минут бот  подключит ваш тариф. <br> <br>
+                                
+                                <b>По любым вопросам обращайтесь в поддержку! <br> Мы всегда вам рады.</b>
+                        </p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-success" data-dismiss="modal">Я понял</button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+
+      <div class="modal fade" id="exampleModal1" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title" id="exampleModalLabel">Эконом</h5>
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>
+                <div class="modal-body">
+                        <center><h4>Чтобы продолжить выполните:</h4></center>
+                        <ol>
+                            <li>Отсканируйте QR.</li>
+                            <li>Введите сумму того,тарифа,который вы выбрали.</li>
+                            <li>В комментарии платежа <b>обязательно</b> оставьте ваш логин в системе.</li>
+                            <li>Нажмите кнопку 'Оплатил'.</li>
+                            <li>В течение 15 минут вы получаете доступ к системе.</li>
+                        </ol>
+
+                       <center><img style="height:300px;width:300px;" src="../static/econom.jpg" alt=""></center>
+                        
+                
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-danger" data-dismiss="modal">Отменить</button>
+                    <a href="/success_pay" class="btn btn-success">Оплатил</a>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="modal fade" id="exampleModal2" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog" role="document">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <h5 class="modal-title" id="exampleModalLabel">Бизнес</h5>
+                      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                      </button>
+                    </div>
+                    <div class="modal-body">
+                        <center><h4>Чтобы продолжить выполните:</h4></center>
+                             <ol>
+                                    <li>Отсканируйте QR.</li>
+                                    <li>Введите сумму того,тарифа,который вы выбрали.</li>
+                                    <li>В комментарии платежа <b>обязательно</b> оставьте ваш логин в системе.</li>
+                                    <li>Нажмите кнопку 'Оплатил'.</li>
+                                    <li>В течение 15 минут вы получаете доступ к системе.</li>
+                             </ol>
+
+                            <center><img style="height:300px;width:300px;" src="../static/business.jpg" alt=""></center>
+                             
+                             
+                    </div>
+                    <div class="modal-footer">
+                            <button type="button" class="btn btn-danger" data-dismiss="modal">Отменить</button>
+                            <a href="/success_pay" class="btn btn-success">Оплатил</a>    
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="modal fade" id="exampleModal3" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal-dialog" role="document">
+                      <div class="modal-content">
+                        <div class="modal-header">
+                          <h5 class="modal-title" id="exampleModalLabel">Премиум</h5>
+                          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                          </button>
+                        </div>
+                        <div class="modal-body">
+                                <center><h4>Чтобы продолжить выполните:</h4></center>
+                             <ol>
+                                    <li>Отсканируйте QR.</li>
+                                    <li>Введите сумму того,тарифа,который вы выбрали.</li>
+                                    <li>В комментарии платежа <b>обязательно</b> оставьте ваш логин в системе.</li>
+                                    <li>Нажмите кнопку 'Оплатил'.</li>
+                                    <li>В течение 15 минут вы получаете доступ к системе.</li>
+                             </ol>
+
+                            <center><img style="height:300px;width:300px;" src="../static/premium.jpg" alt=""></center>
+                             
+                         </div>
+                        <div class="modal-footer">
+                          <button type="button" class="btn btn-danger" data-dismiss="modal">Отменить</button>
+                          <a href="/success_pay" class="btn btn-success">Оплатил</a>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+
+    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+
+</body>
+</html>

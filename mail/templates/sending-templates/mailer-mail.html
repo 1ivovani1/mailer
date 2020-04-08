@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link href="https://fonts.googleapis.com/css2?family=Comic+Neue:wght@300&display=swap" rel="stylesheet">
+
+    <style>
+        *{
+            font-family: 'Comic Neue', cursive !important;
+        }
+    </style>
+
+</head>
+<body>
+    
+    <center>
+        <div style="width:60%;">
+    <center><h1>Alexander Yaroslavskiy Review</h1></center>
+    <center id="text">
+        <p>
+                It's been a long time since I've enjoyed a movie like that! After many years of wandering the genres of Guy Ritchie returned to his native genre, doing what he knows best - very criminal and very English action movie – “Gentlemen”.       
+        </p>
+        
+        <br>
+        
+        <p>
+                Michael Pearson, a wealthy drug lord who has made his business on the sale of marijuana, decides to step back and sell his business, and a seemingly simple deal leads to a series of crazy situations in which willy-nilly dragged all strata - Jews, Chinese Diaspora, African Americans and Russians.Returning to the roots has clearly benefited Richie, because only he can serve the standard gangster disassembly under the brand sauce. Here you and the parallel development of storylines, which, moreover, skilfully shuffle and break the chronology of the narrative, and a pleiad of colorful characters, which perform no less colorful actors - Matthew McConaughey, Charlie Henham, Hugh Grant, Colin Farrell - caste is truly impressive.        
+        </p>
+        
+        <br>
+        
+        <p>
+                But the script itself passes very hard in the finals. Three-quarters of the movie rolling on standard Guy Richie’s rails, there is a simple deal that Michael wants to pull, and then begins no less standard Guy Richie’s cavalcade, where new and new circumstances force the characters to spin in the pan. What, unfortunately, did not work out, is a standard final, which manages to ring the whole story.         
+        </p>
+        
+        <br>
+        
+        <p>
+                Even in spite of the empty finale, "Gentlemen" still remains a great movie, which returned the same feeling when watching old criminal action movies, in addition, not for a moment not forgetting his overly English style, which still oozes from each frame. Do not forget about the abovementioned handwriting of Guy Ritchie - beautiful in its absurdity, which rolls coma on characters, seasoned with beautiful dialogues. Very dynamic, very criminal, very masculine film with a unique gang charm.        
+        </p>
+    </center>
+</div>
+</center>
+
+<script type="text/javascript">
+
+const text = document.getElementById('text');
+
+let counter = 0
+
+for(let i = 0;i < text.textContent.length;i++){
+    if (text.textContent[i] == ' ' && text.textContent[i+1] != '-' && text.textContent[i+1] != ',' && text.textContent[i+1] != ' '){
+        counter++
+    }
+}
+
+console.log(counter)
+
+</script>
+
+</body>
+</html>

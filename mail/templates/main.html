@@ -11,6 +11,7 @@
     <title>Mailer</title>
     <style>
     
+
       .file-input {
   display: inline-block;
   text-align: left;
@@ -55,7 +56,14 @@
 .file-input.-chosen > .label {
   opacity: 1;
 }
-    </style>
+
+@media screen and (max-width:1100px){
+  img[style="height:200px;width:200px;"]{
+    display: none;
+  }
+}
+  
+</style>
     <link href="../static/mail.ico" rel="icon" type="image/x-icon">
 </head>
 <body>
@@ -63,6 +71,9 @@
         <form class="form-inline">
           <a class="btn btn-primary mr-2" href="/guide">Инструкция</a>  
           <a class="btn btn-success" href="/logout">Выйти</a>
+          {% if is_paid == False %}
+          <a class="btn btn-danger ml-2" href="/buy_subscribe">Подписка</a>
+          {% endif %}
         </form>
         <a class="navbar-brand" href="#">
           <img src="../static/logo.png" height="30" alt="">
@@ -70,17 +81,22 @@
       </nav>
 
 
-{% for message in messages %}
 
-  <center class="mt-4"><h2 class="message">{{ message }}</h2></center>
+      {% for message in messages %}
+              <center>
+                <div class="alert alert-success message" role="alert">
+                    {{ message }}
+                </div>
+              </center>
+      {% endfor %}
 
-{% endfor %}
+
 
       <div class="container-fluid mt-4">
 
           <nav>
               <div class="nav nav-tabs" id="nav-tab" role="tablist">
-                <a class="nav-item nav-link active" id="nav-home-tab" data-toggle="tab" href="#nav-home" role="tab" aria-controls="nav-home" aria-selected="true">Emails</a>
+                <a class="nav-item nav-link active" id="nav-home-tab" data-toggle="tab" href="#nav-home" role="tab" aria-controls="nav-home" aria-selected="true"> Emails</a>
                 <a class="nav-item nav-link" id="nav-profile-tab" data-toggle="tab" href="#nav-profile" role="tab" aria-controls="nav-profile" aria-selected="false">SMS</a>
                 <a class="nav-item nav-link" id="nav-template-tab" data-toggle="tab" href="#nav-templates" role="tab" aria-controls="nav-template" aria-selected="false">Мои шаблоны</a>
               
@@ -88,7 +104,7 @@
             </nav>
 
             <div class="tab-content" id="nav-tabContent">
-                <div class="tab-pane fade show active" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
+                <div class="tab-pane fade show active pb-4" id="nav-home" role="tabpanel" aria-labelledby="nav-home-tab">
                     <div class="row mt-4">
                         <div class="col-12 col-sm-12 col-ms-12 col-lg-3 col-xl-3">
                           <div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
@@ -100,50 +116,152 @@
                         <div class="col-12 col-sm-12 col-ms-12 col-lg-9 col-xl-9">
                           <div class="tab-content" id="v-pills-tabContent">
                             <div class="tab-pane fade show active" id="v-pills-home" role="tabpanel" aria-labelledby="v-pills-home-tab">
-    
-                                    <form method="POST" class="sending-form" enctype="multipart/form-data">
-                                            {% csrf_token %}
-                                        <div class="form-group">
-                                              <label for="exampleInputEmail1">Email адрес</label>
-                                              <input type="email" class="form-control" name="email" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Email" required>
-                                              <small id="emailHelp" class="form-text text-muted">Введите email,на который хотите отправить письмо.</small>
-                                            </div>
-                                            
-                                            <div class="form-group">
-                                              <label for="subject">Введите тему письма</label>
-                                              <input type="text" class="form-control" name="subject" id="subject" placeholder="Тема" required>
-                                              <small class="form-text text-muted">Введите тему письма.</small>
-                                            </div>
-                                            
-                                           
-                                            <input type="hidden" name="myself">
-                                            <button type="submit" class="btn btn-primary btn-block mt-4">Отправить</button>
-                                    </form>
-    
-    
-                            </div>
-                            <div class="tab-pane fade" id="v-pills-profile" role="tabpanel" aria-labelledby="v-pills-profile-tab">
+                        {% if is_paid == True %}
+                          <div class="row">
+                            <div class="col-12 col-sm-12 col-md-12 col-lg-6 col-xl-6">
+                              <center><h2 class="mt-4">Отправка HTML</h2></center>
                                 <form method="POST" class="sending-form" enctype="multipart/form-data">
                                   {% csrf_token %}
+                              <div class="form-group">
+                                    <label for="exampleInputEmail1">Email адрес</label>
+                                    <input type="email" class="form-control" name="email" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Email" required>
+                                    <small id="emailHelp" class="form-text text-muted">Введите email,на который хотите отправить письмо.</small>
+                                  </div>
                                   
                                   <div class="form-group">
-                                      <label for="subject">Введите тему письма</label>
-                                      <input type="text" class="form-control" name="subject" id="subject" placeholder="Тема" required>
-                                      <small class="form-text text-muted">Введите тему письма.</small>
-                                    </div>
-    
-                                  
-                                  <div class='file-input'>
-                                    <input type='file' name="txt_file" required>
-                                    <span class='button'>Выберите</span>
-                                    <span class='label' style="color:black !important;" data-js-label>Файл не выбран</label>
+                                    <label for="subject">Введите тему письма</label>
+                                    <input type="text" class="form-control" name="subject" id="subject" placeholder="Тема" required>
+                                    <small class="form-text text-muted">Введите тему письма.</small>
                                   </div>
-                                  <small class="form-text text-muted">Выберите txt файл,из которого хотите достать почты.</small>
-    
-                                  <input type="hidden" name="sending_from_txt">
-                                  <button type="submit" class="btn btn-primary btn-block mt-4">Отправить</button>
                                   
-                              </form>
+                                 
+                                  <input type="hidden" name="myself">
+                                  <button type="submit" class="btn btn-primary btn-block mt-4">Отправить</button>
+                          </form>
+                            </div>
+                            <div class="col-12 col-sm-12 col-md-12 col-lg-6 col-xl-6">
+                                <center><h2 class="mt-4">Отправка текста</h2></center>
+                                <form method="POST" class="sending-form">
+                                  {% csrf_token %}
+
+                              <div class="form-group">
+                                    <label for="exampleInputEmail1">Email адрес</label>
+                                    <input type="email" class="form-control" name="email" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Email" required>
+                                    <small id="emailHelp" class="form-text text-muted">Введите email,на который хотите отправить письмо.</small>
+                                  </div>
+                                  
+                                  <div class="form-group">
+                                    <label for="subject">Введите тему письма</label>
+                                    <input type="text" class="form-control" name="subject" id="subject" placeholder="Тема" required>
+                                    <small class="form-text text-muted">Введите тему письма.</small>
+                                  </div>
+                                  
+                                  <div class="form-group">
+                                      <label for="subject">Введите сообщение</label>
+                                      <textarea  class="form-control" name="message" id="subject" placeholder="Сообщение" required></textarea>
+                                      <small class="form-text text-muted">Введите сообщение.</small>
+                                  </div>
+                                    
+
+                                  <input type="hidden" name="myself_text">
+                                  <button type="submit" class="btn btn-primary btn-block mt-4">Отправить</button>
+                          </form>
+                            </div>
+                          </div>          
+                          
+                        {% else %}
+                                    <div class="row">
+                                      <div class="col-12 col-sm-12 col-md-12 col-lg-8 col-xl-8">
+                                        <h2>К сожалению,этот раздел доступен тем,кто купил подписку!</h2>
+                                        <p>Вы можете оформить подписку здесь:</p><a class='btn btn-danger btn-lg text-light' href="/buy_subscribe">Купить</a>
+                                      </div>
+                                      <div class="col-12 col-sm-12 col-md-12 col-lg-0 col-xl-0" style='display:flex;align-items:center;justify-content:center;'>
+                                        <img style="height:200px;width:200px;" src="https://image.flaticon.com/icons/svg/2746/2746011.svg" alt="">
+                                      </div>
+                                    </div>
+                                    
+                        {% endif %}
+    
+                            </div>
+                            <div class="tab-pane fade pb-4" id="v-pills-profile" role="tabpanel" aria-labelledby="v-pills-profile-tab">
+                              {% if is_paid == True %}  
+                              <div class="row">
+                                <div class="col-12 col-sm-12 col-md-12 col-lg-6 col-xl-6">
+                                  <center>
+                                    <h2 class="mt-4">Отправка HTML</h2>
+                                  </center>
+                                    <form method="POST" enctype="multipart/form-data">
+                                      {% csrf_token %}
+                                      
+                                      <div class="form-group">
+                                          <label for="subject">Введите тему письма</label>
+                                          <input type="text" class="form-control" name="subject" id="subject" placeholder="Тема" required>
+                                          <small class="form-text text-muted">Введите тему письма.</small>
+                                        </div>
+        
+                                      
+                                      <div class='file-input'>
+                                        <input type='file' id='email_txt' name="txt_file" required>
+                                        <span class='button'>Выберите</span>
+                                        <span class='label' style="color:black !important;" id="email_txt_label" data-js-label>Файл не выбран</span>
+                                        <input type="hidden" name='email_txt_filename' id='email_txt_filename'>
+                                      
+                                      </div>
+                                      <small class="form-text text-muted">Выберите txt файл,из которого хотите достать почты.</small>
+        
+                                      <input type="hidden" name="sending_from_txt">
+                                      <button type="submit" class="btn btn-primary btn-block mt-4">Отправить</button>
+                                      
+                                  </form>
+                                </div>
+                                <div class="col-12 col-sm-12 col-md-12 col-lg-6 col-xl-6">
+                                    <center>
+                                      <h2 class="mt-4">Отправка текста</h2>
+                                    </center>  
+                                    <form method="POST" enctype="multipart/form-data">
+                                      {% csrf_token %}
+                                      
+                                      <div class="form-group">
+                                          <label for="subject">Введите тему письма</label>
+                                          <input type="text" class="form-control" name="subject" id="subject" placeholder="Тема" required>
+                                          <small class="form-text text-muted">Введите тему письма.</small>
+                                        </div>
+        
+
+                                      <div class="form-group">
+                                          <label for="subject">Введите сообщение</label>
+                                          <textarea  class="form-control" name="message" id="subject" placeholder="Сообщение" required></textarea>
+                                          <small class="form-text text-muted">Введите сообщение.</small>
+                                      </div>
+                                      
+                                      <div class='file-input'>
+                                        <input type='file' id='email_txt_text' name="txt_file" required>
+                                        <span class='button'>Выберите</span>
+                                        <span class='label' style="color:black !important;" id="email_txt_label_text" data-js-label>Файл не выбран</span>
+                                        <input type="hidden" name='email_txt_filename_text' id='email_txt_filename_text'>
+                                      
+                                      </div>
+                                      <small class="form-text text-muted">Выберите txt файл,из которого хотите достать почты.</small>
+        
+
+                                      <input type="hidden" name="sending_from_txt_text">
+                                      <button type="submit" class="btn btn-primary btn-block mt-4">Отправить</button>
+                                      
+                                  </form>
+                                </div>
+                              </div>
+                              
+                              {% else %}
+                              <div class="row">
+                                <div class="col-12 col-sm-12 col-md-12 col-lg-8 col-xl-8">
+                                  <h2>К сожалению,этот раздел доступен тем,кто купил подписку!</h2>
+                                  <p>Вы можете оформить подписку здесь:</p><a class='btn btn-danger btn-lg text-light' href="/buy_subscribe">Купить</a>
+                                </div>
+                                <div class="col-12 col-sm-12 col-md-12 col-lg-0 col-xl-0" style='display:flex;align-items:center;justify-content:center;'>
+                                  <img style="height:200px;width:200px;" src="https://image.flaticon.com/icons/svg/2746/2746011.svg" alt="">
+                                </div>
+                              </div>
+                              {% endif %}
                             </div>
                             <div class="tab-pane fade" id="v-pills-config" aria-labelledby="v-pills-pconfig-tab">
                                 <div class="row">
@@ -192,7 +310,7 @@
                                   </div>
                                   
                                   <div class="col-12 col-sm-12 col-ms-12 col-lg-6 col-xl-6">
-                                    <h2>Your config</h2>
+                                    <h2>Ваша конфигурация</h2>
                                     <ul class="list-group">
                                         <li class="list-group-item"><strong>Email host: </strong>{{request.user.mail_host}}</li>                                        
                                         <li class="list-group-item"><strong>Имя пользователя: </strong>{{request.user.mail_username}}</li>
@@ -215,12 +333,13 @@
                       <div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
                         <a class="nav-link active" id="v-pills-home-tab" data-toggle="pill" href="#v-pills-phone_one" role="tab" aria-controls="v-pills-phone_one" aria-selected="true">На один номер</a>
                         <a class="nav-link" id="v-pills-profile-tab" data-toggle="pill" href="#v-pills-phone_txt" role="tab" aria-controls="v-pills-phone_txt" aria-selected="false">Из txt файла</a>
-                        <a class="nav-link" id="v-pills-messages-tab" data-toggle="pill" href="#v-pills-phone_config" role="tab" aria-controls="v-pills-phone_config" aria-selected="false">Конфигурация</a>
+                        <!-- <a class="nav-link" id="v-pills-messages-tab" data-toggle="pill" href="#v-pills-phone_config" role="tab" aria-controls="v-pills-phone_config" aria-selected="false">Конфигурация</a> -->
                       </div>
                     </div>
                     <div class="col-12 col-sm-12 col-md-12 col-lg-9 col-xl-9">
                       <div class="tab-content" id="v-pills-tabContent">
                         <div class="tab-pane fade show active" id="v-pills-phone_one" role="tabpanel" aria-labelledby="v-pills-phone_one-tab">
+                          {% if is_paid == True %}
                           <form method='POST' class="sending-form">
                             {% csrf_token %}
                             <input type="hidden" name="one_number_send">
@@ -236,9 +355,21 @@
                             </div>  
                             <button type="submit" class="btn btn-block btn-primary">Отправить</button>
                           </form>
+                          {% else %}
+                          <div class="row">
+                            <div class="col-12 col-sm-12 col-md-12 col-lg-8 col-xl-8">
+                              <h2>К сожалению,этот раздел доступен тем,кто купил подписку!</h2>
+                              <p>Вы можете оформить подписку здесь:</p><a class='btn btn-danger btn-lg text-light' href="/buy_subscribe">Купить</a>
+                            </div>
+                            <div class="col-12 col-sm-12 col-md-12 col-lg-0 col-xl-0" style='display:flex;align-items:center;justify-content:center;'>
+                              <img style="height:200px;width:200px;" src="https://image.flaticon.com/icons/svg/2746/2746011.svg" alt="">
+                            </div>
+                          </div>
+                          {% endif %}
                         </div>
                         <div class="tab-pane fade" id="v-pills-phone_txt" role="tabpanel" aria-labelledby="v-pills-phone_txt-tab">
-                            <form method='POST' class="sending-form" enctype="multipart/form-data">
+                          {% if is_paid == True %}  
+                          <form method='POST' enctype="multipart/form-data">
                                 {% csrf_token %}
                                 <input type="hidden" name="txt_number_send">
                                 
@@ -248,16 +379,29 @@
                                   <small>Введите сообщение,которое хотите отправить.</small>
                                 </div> 
                                 <div class='file-input'>
-                                    <input type='file' name="txt_file" required>
+                                    <input type='file' id="sms_txt_file" name="txt_file" required>
                                     <span class='button'>Выберите</span>
-                                    <span class='label' style="color:black !important;" data-js-label>Файл не выбран</label>
+                                    <span class='label' style="color:black !important;" data-js-label id='sms_txt_label'>Файл не выбран</label>
                                   </div>
+                                  <input type="hidden" name='sms_txt_filename' id='sms_txt_filename'>
+                                  
                                   <small class="form-text text-muted">Выберите txt файл,который в котором нужно найти номера телефонов.</small>
      
                                 <button type="submit" class="btn btn-block btn-primary mt-2">Отправить</button>
                               </form>
+                              {% else %}
+                              <div class="row">
+                                <div class="col-12 col-sm-12 col-md-12 col-lg-8 col-xl-8">
+                                  <h2>К сожалению,этот раздел доступен тем,кто купил подписку!</h2>
+                                  <p>Вы можете оформить подписку здесь:</p><a class='btn btn-danger btn-lg text-light' href="/buy_subscribe">Купить</a>
+                                </div>
+                                <div class="col-12 col-sm-12 col-md-12 col-lg-0 col-xl-0" style='display:flex;align-items:center;justify-content:center;'>
+                                  <img style="height:200px;width:200px;" src="https://image.flaticon.com/icons/svg/2746/2746011.svg" alt="">
+                                </div>
+                              </div>
+                              {% endif %}
                         </div>
-                        <div class="tab-pane fade" id="v-pills-phone_config" role="tabpanel" aria-labelledby="v-pills-phone_config-tab">
+                        <!-- <div class="tab-pane fade" id="v-pills-phone_config" role="tabpanel" aria-labelledby="v-pills-phone_config-tab">
 
                             <div class="row">
                                 <div class="col-12 col-sm-12 col-ms-12 col-lg-6 col-xl-6">
@@ -283,7 +427,7 @@
                                       </form>
                                 </div>
                                 <div class="col-12 col-sm-12 col-ms-12 col-lg-6 col-xl-6">
-                                  <h2>Your config</h2>
+                                  <h2>Ваша конфигурация</h2>
                                   <ul class="list-group">
                                       <li class="list-group-item"><strong>Account sid: </strong>{{request.user.twilio_account_sid}}</li>                                        
                                       <li class="list-group-item"><strong>Auth token: </strong>{{request.user.twilio_auth_token}}</li>
@@ -292,7 +436,7 @@
                                 </div>
                               </div>
 
-                        </div>
+                        </div> -->
                       </div>
                     </div>
                   </div>
@@ -304,18 +448,18 @@
                   
                   <form method="POST" class="mt-4" enctype="multipart/form-data" id="upload_html_file_form">
                     {% csrf_token %}
-                    <input type="hidden" name="html_file_download">
+                    <input type="hidden" value="" id="dowload_file_name" name="html_file_download">
 
                     <div class='file-input' id="file-download">
                       <input type='file' name="html_file" id='upload_html_file'>
-                      <input type="hidden" name='dowload_filename' value="" id="dowload_file_name">
                       <span class='button'>Выбрать</span>
-                      <span class='label' style="color:black !important;" data-js-label>Файл не выбран</label>
+                      <span class='label' id="html_download_label" style="color:black !important;" data-js-label>Файл не выбран</label>
                     </div>
                     <small class="form-text text-muted">Выберите HTML шаблон,который хотите сделать активным.</small>
 
 
                   </form>
+
 
                   <div class="row mt-4">
                     {% for template in all_user_templates %}
@@ -328,7 +472,7 @@
                             <input type="hidden" name="template_id" value='{{template.id}}'>
                             <h5 class="card-title">{{template.filename}}</h5>
                           </form>
-                          <button class="btn btn-primary btn-block preview-button" id='preview_btn' data-toggle="modal" data-target=".template-preview-{{template.id}}">Посмотреть</button>
+                          <a href="/preview?id={{template.id}}" class="btn btn-primary btn-block preview-button" id='preview_btn'>Посмотреть</a>
                         </div>
                       </div>
                     </div>
@@ -341,17 +485,6 @@
       </div>
 
 
-      <!-- modal block start  -->
-      {% for template in templates_to_render %}
-      <div class="modal fade bd-example-modal-xl template-preview" tabindex="-1" role="dialog" aria-labelledby="myExtraLargeModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-xl" role="document">
-          <div class="modal-content template-preview-content">
-            {{template}}
-          </div>
-        </div>
-      </div>
-      {% endfor %}
-      <!-- modal block end -->
 
       <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
       <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>

@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>         
+    <meta charset="UTF-8">
+    <link href="https://fonts.googleapis.com/css?family=Noto+Sans&display=swap" rel="stylesheet">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <link rel="stylesheet" href="../static/css/client-page.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.1/css/all.css"
+    integrity="sha384-gfdkjb5BdAXd+lj+gudLWI+BXq4IuLW5IT+brZEZsLFm++aCMlF1V92rMkPaX4PP" crossorigin="anonymous">
+    <title>Mailer</title>
+</head>
+<body>
+            
+    <div id="layer-1">
+    <div id="background-for-tire"></div>
+    <img class="tire-img" src="../static/images/client-img/297751.png">
+    <div class="colorful-layer"></div>
+    
+    <div id="tire-img"></div>
+
+    <header>
+        
+        <div class="row">
+            <div class="col-lg-3 col-xl-3 col-6 col-sm-6 col-md-6" style="background: url(../static/images/logo.png) center no-repeat;background-size:contain;width: 136px;
+height: 136px;">
+
+            </div>
+            <div class="col-lg-3 col-xl-3 col-6 col-sm-6 col-md-6 " style="font-style: normal;font-weight: normal;font-size: 14px;line-height: 19px;color: #BBBBBB;">
+                Помогаем вам и вашему бизнесу с 2018 года.
+            </div>
+            
+            
+            <div class="col-lg-3 col-xl-3 header__hide " style="font-weight: 500;font-size: 14px;line-height: 19px;color: #BBBBBB;">
+                г.Калининград Ул.Богдана Хмельницкого,87
+            </div>
+            
+            <div class="col-lg-3 col-xl-3 col-sm-12 col-12 col-md-12">
+                <a href="tel:+79097990305" style="text-decoration:none;color:white;font-weight:bolder;font-size: 20px;">+7 909 799 03 05</a>
+            </div>
+            
+        </div>
+    
+    </header>
+
+    <div id="main-info">
+        <h1 style="font-weight:bolder;">Гарантировано и выгодно доставим и растаможим новые и б/у шины из любой точки мира в Россию.</h1>
+        <p> <span style="font-style: normal;font-weight: normal;font-size: 24px;line-height: 33px;color: #CBCBCB;">Пройдем таможню за 48 часов с любыми брендами.</span> <br> <span style="font-style: normal;font-weight: normal;font-size: 18px;line-height: 25px;color:white;">Ответьте на несколько вопросов и <span style="color:#1869AB">получите расчет ставки!</span> </span></p>
+        
+    <div class="block-reversed-mobile">
+        <div class="row mt-4 main-top-row">
+            <div class="col-12 col-sm-12 col-md-12 col-lg-4 col-xl-4 card-info-pref">
+                <img src="../static/images/client-img/certificate 1.png" class="img-inside-top" alt="">
+                <p class="p-inside-top">Сотрудники с опытом работы на таможне и таможенным образованием.</p>
+            </div>
+            <div class="col-12 col-sm-12 col-md-12 col-lg-4 col-xl-4 card-info-pref">
+                <img src="../static/images/client-img/certificate 1.png" class="img-inside-top" alt="">
+                <p class="p-inside-top">За время работы оформлено более 500 тысяч колес.</p>
+            </div>
+            <div class="col-12 col-sm-12 col-md-12 col-lg-4 col-xl-4 card-info-pref">
+                <img src="../static/images/client-img/warranty (1) 1.png" class="img-inside-top" alt="">
+                <p class="p-inside-top">Опыт в логистике 10 лет</p>
+            </div>
+        </div> 
+        <button class="btn btn-light mt-4" onclick="slowScroll('#layer-2')" id="main-bottom-btn" style="width: 35%;padding: 15px;font-family: 'Noto Sans', ;font-weight:bolder;box-shadow: 0px 4px 20px rgba(255, 255, 255, 0.3);border-radius: 5px;">Получить расчет ставки</button>
+    </div>
+
+    </div>
+    </div>
+
+    <div id="layer-2">
+        <div id="layer-2-logo"></div>
+        <center><h1 style="font-weight:bolder;">Заполните форму заявки и получите <span style="color:#1869AB;">скидку 300€</span> на первую машину!</h1></center>
+        <form action="mail.php">
+        <div class="row" style="margin-top: 10%;">
+            <div class="col-12 col-sm-12 col-md-12 col-lg-6 col-xl-6">
+                <input type="text" name='user_name' class="form-layer-2" placeholder="Введите ваше имя">
+            </div>
+            <div class="col-12 col-sm-12 col-md-12 col-lg-6 col-xl-6">
+                <input type="text" name='tire_amount'  class="form-layer-2" placeholder="Количество шин">
+            </div>
+            <div class="col-12 col-sm-12 col-md-12 col-lg-6 col-xl-6">
+                <select name="tire-brand" id="" class=" form-select">
+                    <option>Все бренды</option>
+                    <option>Bridgestone, Firestone, Good Year, Michelin, Hankook и др.</option>
+                </select>
+            </div>
+            <div class="col-12 col-sm-12 col-md-12 col-lg-6 col-xl-6">
+                <select name="tire-type" id="" class=" form-select">
+                        <option>Грузовые</option>
+                        <option>Легковые</option>
+                        <option>Для спецтехники</option>
+                </select>
+            
+            </div>
+            <div class="col-12 col-sm-12 col-md-12 col-lg-6 col-xl-6">
+                <input type="text" name='user_phone' class="form-layer-2" placeholder="Введите номер телефона">
+            </div>
+            <div class="col-12 col-sm-12 col-md-12 col-lg-6 col-xl-6">
+                <input type="text" name='email' class="form-layer-2" placeholder="Email">
+            </div>
+        </div>
+        <center><button class="btn btn-primary form-button-2" type="submit" style="background: #1971A8;padding:2% 4%;">Получить расчет ставки</button></center>
+    </form>
+    </div>
+
+    <div id="layer-3" style="display: flex;align-items:center;justify-content:center;flex-direction:column;">
+            <div id="layer-3-triangle"></div>
+            <center><h1 style="font-weight:bolder;">Пройдем таможню за 2 дня</h1></center>
+            <div class="row" style="margin-top: 5%;width:90%;">
+                <div class="col-12 col-sm-12 col-md-12 col-lg-4 col-xl-4 we-need-margin">
+                    <div class="row we_need_flex">
+                            <div class="col-12 col-sm-12 col-md-12 col-lg-4 col-xl-4" class="advantage-img">
+                        
+                        <img src="../static/images/client-img/Снимок экрана 2020-03-02 в 22.20.48.png"  alt="">
+                            </div>
+                        <div class="col-12 col-sm-12 col-md-12 col-lg-8 col-xl-8">
+                            <h5 style="font-weight:bolder">Согласовываем ставку </h5>
+                            <p><span id="docs-internal-guid-91e35942-7fff-a2d1-f198-9abda00b75bb"><span style="font-size: 11pt; font-family: Arial; color: rgb(0, 0, 0); background-color: transparent; font-variant-numeric: normal; font-variant-east-asian: normal; vertical-align: baseline; white-space: pre-wrap;">Уточняем характеристики партии и рассчитываем ставку</span></span></p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-12 col-sm-12 col-md-12 col-lg-4 col-xl-4 we-need-margin">
+                    <div class="row we_need_flex">
+                        <div class="col-12 col-sm-12 col-md-12 col-lg-4 col-xl-4" class="advantage-img">
+                                <img src="../static/images/client-img/Снимок экрана 2020-03-02 в 22.22.19.png"  alt="">
+                        </div>
+                        <div class="col-12 col-sm-12 col-md-12 col-lg-8 col-xl-8">
+                                <h5 style="font-weight:bolder">Готовим документы</h5>
+                                <p>Готовим товарно-транспортные сопроводительные документы и получаем&nbsp; необходимые разрешения</p>
+    
+                        </div>
+                    </div>
+                </div>
+                <div class="col-12 col-sm-12 col-md-12 col-lg-4 col-xl-4 we-need-margin">
+                    <div class="row we_need_flex"> 
+                            <div class="col-12 col-sm-12 col-md-12 col-lg-4 col-xl-4" class="advantage-img">
+                           
+                        <img src="../static/images/client-img/Снимок экрана 2020-03-02 в 22.22.21.png" alt="">
+                            </div>
+                        <div class="col-12 col-sm-12 col-md-12 col-lg-8 col-xl-8">
+                                <h5 style="font-weight:bolder">Забираем груз</h5>
+                                <p>Ставим транспорт под погрузку</p>
+    
+                        </div>
+                    </div>
+                </div>
+                <div class="col-12 col-sm-12 col-md-12 col-lg-4 col-xl-4 we-need-margin">
+                    <div class="row we_need_flex">
+                            <div class="col-12 col-sm-12 col-md-12 col-lg-4 col-xl-4" class="advantage-img">
+                        
+                        <img src="../static/images/client-img/Снимок экрана 2020-03-02 в 22.22.25.png" alt="">
+                            </div>
+                        <div class="col-12 col-sm-12 col-md-12 col-lg-8 col-xl-8">
+                                <h5 style="font-weight:bolder">Проходим таможню</h5>
+                                <p>Подаем таможенную декларацию и проходим все формы таможенного контроля. Получаем разрешение на ввоз</p>
+    
+                        </div>
+                    </div>
+                </div>
+                <div class="col-12 col-sm-12 col-md-12 col-lg-4 col-xl-4 we-need-margin">
+                    <div class="row we_need_flex">
+                            <div class="col-12 col-sm-12 col-md-12 col-lg-4 col-xl-4" class="advantage-img">
+                        <img src="../static/images/client-img/Снимок экрана 2020-03-02 в 22.22.31.png"  alt="">
+                            </div>
+                        <div class="col-12 col-sm-12 col-md-12 col-lg-8 col-xl-8">
+                                <h5 style="font-weight:bolder">Оплата</h5>
+                                <p>Получаем от вас полную оплату за наши услуги согласованным способом</p>
+    
+                        </div>
+                    </div>
+                </div>
+                <div class="col-12 col-sm-12 col-md-12 col-lg-4 col-xl-4 we-need-margin">
+                    <div class="row we_need_flex">
+                            <div class="col-12 col-sm-12 col-md-12 col-lg-4 col-xl-4" class="advantage-img">
+                        
+                        <img src="../static/images/client-img/Снимок экрана 2020-03-02 в 22.22.33.png" alt="">
+                            </div>
+                        <div class="col-12 col-sm-12 col-md-12 col-lg-8 col-xl-8">
+                                <h5 style="font-weight:bolder">Доставляем товар на ваш склад</h5>
+                                <p>Довозим груз до вашего склада в России</p>
+    
+                        </div>
+                    </div>
+                </div>
+            </div>
+    </div>
+
+    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2352.933913787922!2d27.478226515866588!3d53.86182308009031!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x46dbd07998de5cb9%3A0x6ae38cf1079d8e2a!2z0L_RgNC-0YHQv9C10LrRgiDQlNC30LXRgNC20LjQvdGB0LrQvtCz0L4gMTA0LCDQnNC40L3RgdC6IDIyMDA4OSwg0JHQtdC70LDRgNGD0YHRjA!5e0!3m2!1sru!2sru!4v1584362010394!5m2!1sru!2sru"  height="450" frameborder="0" style="border:0;" allowfullscreen="" aria-hidden="false" tabindex="0"></iframe>
+    
+    <header id="footer">
+        <center>
+            <div class="row" style='width:90%;'>
+                    <div class="col-lg-3 col-xl-3 col-6 col-sm-6 col-md-6" style="background: url(../static/images/logo.png) center no-repeat;background-size:contain;width: 136px;
+                    height: 136px;">
+                    
+                                </div>
+                                <div class="col-lg-3 col-xl-3 col-6 col-sm-6 col-md-6 " style="font-style: normal;font-weight: normal;font-size: 14px;line-height: 19px;color: #BBBBBB;">
+                                    Помогаем вам и вашему бизнесу с 2018 года.
+                                </div>
+                                
+                                
+                                <div class="col-lg-3 col-xl-3 header__hide " style="font-weight: 500;font-size: 14px;line-height: 19px;color: #BBBBBB;">
+                                    г.Калининград Ул.Богдана Хмельницкого,87
+                                </div>
+                                
+                                <div class="col-lg-3 col-xl-3 col-sm-12 col-12 col-md-12">
+                                    <a href="tel:+79097990305" style="text-decoration:none;color:white;font-weight:bolder;font-size: 20px;">+7 909 799 03 05</a>
+                                </div>
+                                
+                
+            </div>
+        </center>
+        </header>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js" crossorigin="anonymous"></script>    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+    <script src="../static/js/client-page.js"></script>
+</body>
+</html>
