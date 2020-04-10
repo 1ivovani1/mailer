@@ -15,11 +15,6 @@
 <body>
 
     <div id="layer-1">
-    <!-- <div id="background-for-tire"></div>
-    <img class="tire-img" src="../static/images/client-img/297751.png">
-    <div class="colorful-layer"></div>
-
-    <div id="tire-img"></div> -->
 
     <header>
 
@@ -74,42 +69,6 @@ height: 136px;">
     </div>
 
     </div>
-    </div>
-
-    <div id="layer-2">
-        <div id="layer-2-logo"></div>
-        <center><h1 style="font-weight:bolder;">Заполните форму заявки и получите <span style="color:#1869AB;">скидку 300€</span> на первую машину!</h1></center>
-        <form action="mail.php">
-        <div class="row" style="margin-top: 10%;">
-            <div class="col-12 col-sm-12 col-md-12 col-lg-6 col-xl-6">
-                <input type="text" name='user_name' class="form-layer-2" placeholder="Введите ваше имя">
-            </div>
-            <div class="col-12 col-sm-12 col-md-12 col-lg-6 col-xl-6">
-                <input type="text" name='tire_amount'  class="form-layer-2" placeholder="Количество шин">
-            </div>
-            <div class="col-12 col-sm-12 col-md-12 col-lg-6 col-xl-6">
-                <select name="tire-brand" id="" class=" form-select">
-                    <option>Все бренды</option>
-                    <option>Bridgestone, Firestone, Good Year, Michelin, Hankook и др.</option>
-                </select>
-            </div>
-            <div class="col-12 col-sm-12 col-md-12 col-lg-6 col-xl-6">
-                <select name="tire-type" id="" class=" form-select">
-                        <option>Грузовые</option>
-                        <option>Легковые</option>
-                        <option>Для спецтехники</option>
-                </select>
-
-            </div>
-            <div class="col-12 col-sm-12 col-md-12 col-lg-6 col-xl-6">
-                <input type="text" name='user_phone' class="form-layer-2" placeholder="Введите номер телефона">
-            </div>
-            <div class="col-12 col-sm-12 col-md-12 col-lg-6 col-xl-6">
-                <input type="text" name='email' class="form-layer-2" placeholder="Email">
-            </div>
-        </div>
-        <center><button class="btn btn-primary form-button-2" type="submit" style="background: #1971A8;padding:2% 4%;">Получить расчет ставки</button></center>
-    </form>
     </div>
 
     <div id="layer-3" style="display: flex;align-items:center;justify-content:center;flex-direction:column;">
@@ -194,7 +153,118 @@ height: 136px;">
             </div>
     </div>
 
-    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2352.933913787922!2d27.478226515866588!3d53.86182308009031!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x46dbd07998de5cb9%3A0x6ae38cf1079d8e2a!2z0L_RgNC-0YHQv9C10LrRgiDQlNC30LXRgNC20LjQvdGB0LrQvtCz0L4gMTA0LCDQnNC40L3RgdC6IDIyMDA4OSwg0JHQtdC70LDRgNGD0YHRjA!5e0!3m2!1sru!2sru!4v1584362010394!5m2!1sru!2sru"  height="450" frameborder="0" style="border:0;" allowfullscreen="" aria-hidden="false" tabindex="0"></iframe>
+  <center><h1 style="font-weight:bolder;margin-bottom:3%;margin-top:3%;">Попробовать Mailer <span style="color:#1869AB;">сейчас</span>!</h1></center>
+
+
+        <div id="layer-2">
+              <form method="post" style="width:50%;align-self:flex-start;background:white; border-radius:15px;padding:1.5rem;">
+                <div class="form-group" style="margin-bottom:0;">
+                  <div class="row">
+                    <div class="col-12 col-sm-12 col-md-12 col-lg-6 col-xl-6">
+                      <input type="email" required name="mailer-test" class="form-control p-2" placeholder="Любой e-mail">
+                    </div>
+
+                    <div class="col-12 col-sm-12 col-md-12 col-lg-6 col-xl-6">
+                      <button type='submit' class="btn btn-outline-primary btn-block">Попробовать!</button>
+
+                    </div>
+                  </div>
+
+                </div>
+              </form>
+            </div>
+
+
+            <div class="pricing-header px-3 py-3 pt-md-5 pb-md-4 mx-auto text-center">
+                <h1 style="font-weight:bolder;" >Тарифные планы <img style="height:60px;width:60px;" src="https://image.flaticon.com/icons/svg/506/506766.svg" alt=""> </h1>
+              </div>
+
+              <div class="container">
+                <div class="card-deck mb-3 text-center">
+                  <div class="card mb-4 box-shadow" style="padding-bottom:20px;">
+                    <div class="card-header">
+                      <h4 class="my-0 font-weight-normal">Эконом</h4>
+                    </div>
+                    <div class="card-body">
+                      <h1 class="card-title pricing-card-title">15.599₽</h1>
+                      <ul class="list-unstyled mt-3 mb-4">
+                        <li>1000 SMS</li>
+                        <li>2000 email-s</li>
+                        <li>База данных клиентов на 50 человек</li>
+                      </ul>
+                    </div>
+
+                    <center>
+                            <div class="row" style="width:80%;">
+                                <div class="col-12 col-sm-12 col-md-12 col-lg-6 col-xl-6 pr-1 qr-btn">
+                                    <button  type="button" class="btn btn-lg btn-block btn-success" data-toggle="modal" data-target="#exampleModal1"><i class="fas fa-qrcode"></i></button>
+                                </div>
+                                <div class="col-12 col-sm-12 col-md-12 col-lg-6 col-xl-6 pl-0 buy-btn">
+                                        <a href="https://money.yandex.ru/to/410018707507727/15999" class="btn btn-lg btn-block btn-primary">Купить</a>
+                                </div>
+                            </div>
+                        </center>
+
+                </div>
+                  <div class="card mb-4 box-shadow" style="padding-bottom:20px;">
+                    <div class="card-header">
+                      <h4 class="my-0 font-weight-normal">Бизнес</h4>
+                    </div>
+                    <div class="card-body">
+                      <h1 class="card-title pricing-card-title">50.000₽</small></h1>
+                      <ul class="list-unstyled mt-3 mb-4">
+                        <li>5.000 SMS</li>
+                        <li>15.000 email</li>
+                        <li>База данных клиентов на 100 человек</li>
+                        <li>Автоматическая настройка системы</li>
+                      </ul>
+                    </div>
+
+                    <center>
+                            <div class="row" style="width:80%;">
+                                <div class="col-12 col-sm-12 col-md-12 col-lg-6 col-xl-6 pr-1 qr-btn">
+                                    <button  type="button" class="btn btn-lg btn-block btn-success" data-toggle="modal" data-target="#exampleModal2"><i class="fas fa-qrcode"></i></button>
+                                </div>
+                                <div class="col-12 col-sm-12 col-md-12 col-lg-6 col-xl-6 pl-0 buy-btn">
+                                        <a href="https://money.yandex.ru/to/410018707507727/50000" class="btn btn-lg btn-block btn-primary">Купить</a>
+                                </div>
+                            </div>
+                        </center>
+
+                </div>
+                  <div class="card mb-4 box-shadow" style="padding-bottom:20px;">
+                    <div class="card-header">
+                      <h4 class="my-0 font-weight-normal">Премиум</h4>
+                    </div>
+                    <div class="card-body">
+                      <h1 class="card-title pricing-card-title">110.000₽</h1>
+                      <ul class="list-unstyled mt-3 mb-4">
+                            <li>15.000 SMS</li>
+                            <li>∞ email</li>
+                            <li>База данных клиентов на 250 человек</li>
+                            <li>Автоматическая настройка системы</li>
+                      </ul>
+                    </div>
+                    <center>
+                        <div class="row" style="width:80%;">
+                            <div class="col-12 col-sm-12 col-md-12 col-lg-6 col-xl-6 pr-1 qr-btn">
+                                <button  type="button" class="btn btn-lg btn-block btn-success" data-toggle="modal" data-target="#exampleModal3"><i class="fas fa-qrcode"></i></button>
+                            </div>
+                            <div class="col-12 col-sm-12 col-md-12 col-lg-6 col-xl-6 pl-0 buy-btn">
+                                    <a href="https://money.yandex.ru/to/410018707507727/110000" class="btn btn-lg btn-block btn-primary">Купить</a>
+                            </div>
+                        </div>
+                    </center>
+
+                </div>
+                </div>
+
+              </div>
+
+              <center><h1 style="font-weight:bolder;margin-bottom:3%;margin-top:3%;">Наши контакты</h1></center>
+
+
+    <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2305.6903737867847!2d20.511174415266918!3d54.6974760803501!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x46e3163fa351196d%3A0x5a2de2c171593373!2z0YPQuy4g0JHQvtCz0LTQsNC90LAg0KXQvNC10LvRjNC90LjRhtC60L7Qs9C-LCA4Nywg0JrQsNC70LjQvdC40L3Qs9GA0LDQtCwg0JrQsNC70LjQvdC40L3Qs9GA0LDQtNGB0LrQsNGPINC-0LHQuy4sIDIzNjAzOQ!5e0!3m2!1sru!2sru!4v1586464681821!5m2!1sru!2sru"  height="450" frameborder="0" style="border:0;" allowfullscreen="" aria-hidden="false" tabindex="0"></iframe>
 
     <header id="footer">
         <center>
@@ -223,7 +293,7 @@ height: 136px;">
                       border-radius:15px;">+7 909 799 03 05</a>
                   </div>
 
-              
+
 
 
             </div>
