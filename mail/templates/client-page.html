@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <link href="../static/images/mail.ico" rel="icon" type="image/x-icon">
     <meta charset="UTF-8">
     <link href="https://fonts.googleapis.com/css?family=Noto+Sans&display=swap" rel="stylesheet">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -11,15 +12,24 @@
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.1/css/all.css"
     integrity="sha384-gfdkjb5BdAXd+lj+gudLWI+BXq4IuLW5IT+brZEZsLFm++aCMlF1V92rMkPaX4PP" crossorigin="anonymous">
     <title>Mailer</title>
+    {% include "preloader-styles.html" %}
 </head>
 <body>
 
-    <div id="layer-1">
+    {% include "preloader-html.html" %}
 
+    <div id="layer-1" class="pt-2">
+        {% for message in messages %}
+      <center class="messages">
+          <div {% if message.tags == 'error' %} class="alert message alert-success" {% else %} class="alert message alert-danger" {% endif %} role="alert">
+              {{ message }}
+          </div>
+        </center>
+      {% endfor %}
     <header>
 
         <div class="row">
-            <div class="col-lg-3 col-xl-3 col-6 col-sm-6 col-md-6" style="background: url(../static/images/logo-white.svg.) center no-repeat ;background-size:contain;width: 126px;
+            <div class="col-lg-3 col-xl-3 col-6 col-sm-6 col-md-6" style="background: url(../static/images/logo-white.svg) center no-repeat ;background-size:contain;width: 126px;
 height: 136px;">
 
             </div>
@@ -36,10 +46,17 @@ height: 136px;">
               border-radius:15px;"> г.Калининград Ул.Богдана Хмельницкого,87</span>
             </div>
 
-            <div class="col-lg-3 col-xl-3 col-sm-12 col-12 col-md-12">
-                <a href="tel:+79097990305" style="text-decoration:none;color:white;font-weight:bolder;font-size: 20px;padding:5%;
-                background: linear-gradient(146.83deg, #252839 39.23%, #252839 97.46%);
-                border-radius:15px;">+7 909 799 03 05</a>
+            <div class="col-lg-3 col-xl-3 col-sm-12 col-12 col-md-12 dropdown show">
+                    <a class="btn btn-info btn-lg dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                     Панель управления Mailer!
+                    </a>
+                  
+                    <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                      <a class="dropdown-item" href="/register">Зарегистрироваться</a>
+                      <div class="dropdown-divider"></div>
+                      <a class="dropdown-item" href="/login">Войти</a>
+                    </div>
+                  
             </div>
 
         </div>
@@ -47,67 +64,57 @@ height: 136px;">
     </header>
 
     <div id="main-info">
-        <h1 style="font-weight:bolder;z-index: 99999 !important;">Гарантировано и выгодно доставим и растаможим новые и б/у шины из любой точки мира в Россию.</h1>
-        <p> <span style="font-style: normal;z-index: 99999 !important;font-weight: normal;font-size: 24px;line-height: 33px;color: #CBCBCB;">Пройдем таможню за 48 часов с любыми брендами.</span> <br> <span style="font-style: normal;font-weight: normal;font-size: 18px;line-height: 25px;color:white;">Ответьте на несколько вопросов и <span style="color:#1869AB">получите расчет ставки!</span> </span></p>
+        <h1 style="font-weight:bolder;z-index: 99999 !important;">Mailer - это привлечение клиентов в ваш бизнес.</h1>
+        <p> <span style="font-style: normal;z-index: 99999 !important;font-weight: normal;font-size: 24px;line-height: 33px;color: #CBCBCB;">Осуществляем массовые рассылки на email и не только!</span> </p>
 
     <div class="block-reversed-mobile">
         <div class="row mt-4 main-top-row">
             <div class="col-12 col-sm-12 col-md-12 col-lg-4 col-xl-4 card-info-pref">
-                <img src="../static/images/client-img/certificate 1.png" class="img-inside-top" alt="">
-                <p class="p-inside-top">Сотрудники с опытом работы на таможне и таможенным образованием.</p>
+                <img src="../static/images/client-img/automatization.svg" class="img-inside-top" alt="">
+                <p class="p-inside-top">Все происходит полностью автоматически</p>
             </div>
             <div class="col-12 col-sm-12 col-md-12 col-lg-4 col-xl-4 card-info-pref">
-                <img src="../static/images/client-img/certificate 1.png" class="img-inside-top" alt="">
-                <p class="p-inside-top">За время работы оформлено более 500 тысяч колес.</p>
+                <img src="../static/images/client-img/companies.svg" class="img-inside-top" alt="">
+                <p class="p-inside-top">С нами сотрудничает большое количество компаний</p>
             </div>
             <div class="col-12 col-sm-12 col-md-12 col-lg-4 col-xl-4 card-info-pref">
-                <img src="../static/images/client-img/warranty (1) 1.png" class="img-inside-top" alt="">
-                <p class="p-inside-top">Опыт в логистике 10 лет</p>
+                <img src="../static/images/client-img/safety.svg" class="img-inside-top" alt="">
+                <p class="p-inside-top">На рынке более 2 лет</p>
             </div>
         </div>
-        <button class="btn btn-light mt-4" onclick="slowScroll('#layer-2')" id="main-bottom-btn" style="width: 35%;padding: 15px;font-family: 'Noto Sans', ;z-index: 9999999999999999999999999999 !important;font-weight:bolder;box-shadow: 0px 4px 20px rgba(255, 255, 255, 0.3);border-radius: 5px;">Получить расчет ставки</button>
+        <button class="btn btn-light mt-4" onclick="slowScroll('#layer-2')" id="main-bottom-btn" style="width: 35%;padding: 15px;font-family: 'Noto Sans', ;z-index: 999 !important;font-weight:bolder;box-shadow: 0px 4px 20px rgba(255, 255, 255, 0.3);border-radius: 5px;">Попробовать Mailer!</button>
     </div>
 
     </div>
     </div>
+
+    <center><h1 style="font-weight:bolder;margin-bottom:3%;margin-top:3%;">Почему именно Mailer?</h1></center>
+            
 
     <div id="layer-3" style="display: flex;align-items:center;justify-content:center;flex-direction:column;">
             <div id="layer-3-triangle"></div>
-            <center><h1 style="font-weight:bolder;">Пройдем таможню за 2 дня</h1></center>
-            <div class="row" style="margin-top: 5%;width:90%;">
+            <div class="row" style="width:90%;">
                 <div class="col-12 col-sm-12 col-md-12 col-lg-4 col-xl-4 we-need-margin">
                     <div class="row we_need_flex">
                             <div class="col-12 col-sm-12 col-md-12 col-lg-4 col-xl-4" class="advantage-img">
 
-                        <img src="../static/images/client-img/Снимок экрана 2020-03-02 в 22.20.48.png"  alt="">
+                        <img src="../static/images/client-img/good.svg"  alt="">
                             </div>
                         <div class="col-12 col-sm-12 col-md-12 col-lg-8 col-xl-8">
-                            <h5 style="font-weight:bolder">Согласовываем ставку </h5>
-                            <p><span id="docs-internal-guid-91e35942-7fff-a2d1-f198-9abda00b75bb"><span style="font-size: 11pt; font-family: Arial; color: rgb(0, 0, 0); background-color: transparent; font-variant-numeric: normal; font-variant-east-asian: normal; vertical-align: baseline; white-space: pre-wrap;">Уточняем характеристики партии и рассчитываем ставку</span></span></p>
+                            <h5 style="font-weight:bolder"> <b>Подбираем услугу максимально подходящую для вас</b></h5>
+                            <p>Вы можете выбрать услугу,подходящую именно для вас и вашего бизнеса. </p>
+
                         </div>
                     </div>
                 </div>
                 <div class="col-12 col-sm-12 col-md-12 col-lg-4 col-xl-4 we-need-margin">
                     <div class="row we_need_flex">
                         <div class="col-12 col-sm-12 col-md-12 col-lg-4 col-xl-4" class="advantage-img">
-                                <img src="../static/images/client-img/Снимок экрана 2020-03-02 в 22.22.19.png"  alt="">
+                                <img src="../static/images/client-img/guarantee.svg"  alt="">
                         </div>
                         <div class="col-12 col-sm-12 col-md-12 col-lg-8 col-xl-8">
-                                <h5 style="font-weight:bolder">Готовим документы</h5>
-                                <p>Готовим товарно-транспортные сопроводительные документы и получаем&nbsp; необходимые разрешения</p>
-
-                        </div>
-                    </div>
-                </div>
-                <div class="col-12 col-sm-12 col-md-12 col-lg-4 col-xl-4 we-need-margin">
-                    <div class="row we_need_flex">
-                            <div class="col-12 col-sm-12 col-md-12 col-lg-4 col-xl-4" class="advantage-img">
-
-                        <img src="../static/images/client-img/Снимок экрана 2020-03-02 в 22.22.21.png" alt="">
-                            </div>
-                        <div class="col-12 col-sm-12 col-md-12 col-lg-8 col-xl-8">
-                                <h5 style="font-weight:bolder">Забираем груз</h5>
-                                <p>Ставим транспорт под погрузку</p>
+                                <h5 style="font-weight:bolder"> <b>Гарантии</b></h5>
+                                <p>Если вдруг вам по какой-то причине не подошел Mailer,то мы вернем вам деньги в течение дня. </p>
 
                         </div>
                     </div>
@@ -116,23 +123,11 @@ height: 136px;">
                     <div class="row we_need_flex">
                             <div class="col-12 col-sm-12 col-md-12 col-lg-4 col-xl-4" class="advantage-img">
 
-                        <img src="../static/images/client-img/Снимок экрана 2020-03-02 в 22.22.25.png" alt="">
+                        <img src="../static/images/client-img/fast.svg" alt="">
                             </div>
                         <div class="col-12 col-sm-12 col-md-12 col-lg-8 col-xl-8">
-                                <h5 style="font-weight:bolder">Проходим таможню</h5>
-                                <p>Подаем таможенную декларацию и проходим все формы таможенного контроля. Получаем разрешение на ввоз</p>
-
-                        </div>
-                    </div>
-                </div>
-                <div class="col-12 col-sm-12 col-md-12 col-lg-4 col-xl-4 we-need-margin">
-                    <div class="row we_need_flex">
-                            <div class="col-12 col-sm-12 col-md-12 col-lg-4 col-xl-4" class="advantage-img">
-                        <img src="../static/images/client-img/Снимок экрана 2020-03-02 в 22.22.31.png"  alt="">
-                            </div>
-                        <div class="col-12 col-sm-12 col-md-12 col-lg-8 col-xl-8">
-                                <h5 style="font-weight:bolder">Оплата</h5>
-                                <p>Получаем от вас полную оплату за наши услуги согласованным способом</p>
+                                <h5 style="font-weight:bolder"><b>Максимально быстрый результат </b></h5>
+                                <p>Пользуясь услугами Mailer,вы с большей долей вероятности получите большой поток клиентов в ближайшее время.</p>
 
                         </div>
                     </div>
@@ -141,11 +136,36 @@ height: 136px;">
                     <div class="row we_need_flex">
                             <div class="col-12 col-sm-12 col-md-12 col-lg-4 col-xl-4" class="advantage-img">
 
-                        <img src="../static/images/client-img/Снимок экрана 2020-03-02 в 22.22.33.png" alt="">
+                        <img src="../static/images/client-img/24.svg" alt="">
                             </div>
                         <div class="col-12 col-sm-12 col-md-12 col-lg-8 col-xl-8">
-                                <h5 style="font-weight:bolder">Доставляем товар на ваш склад</h5>
-                                <p>Довозим груз до вашего склада в России</p>
+                                <h5 style="font-weight:bolder"><b>Работаем круглосуточно</b> </h5>
+                                <p>Принимаем обращения и заявки круглосуточно.</p>
+
+                        </div>
+                    </div>
+                </div>
+                <div class="col-12 col-sm-12 col-md-12 col-lg-4 col-xl-4 we-need-margin">
+                    <div class="row we_need_flex">
+                            <div class="col-12 col-sm-12 col-md-12 col-lg-4 col-xl-4" class="advantage-img">
+                        <img src="../static/images/client-img/pay.svg"  alt="">
+                            </div>
+                        <div class="col-12 col-sm-12 col-md-12 col-lg-8 col-xl-8">
+                                <h5 style="font-weight:bolder"> <b>Оплата</b></h5>
+                                <p>Мы сделали оплату максимально удобной для наших клиентов,поэтому вы можете оплачивать услуги любым способом.</p>
+
+                        </div>
+                    </div>
+                </div>
+                <div class="col-12 col-sm-12 col-md-12 col-lg-4 col-xl-4 we-need-margin">
+                    <div class="row we_need_flex">
+                            <div class="col-12 col-sm-12 col-md-12 col-lg-4 col-xl-4" class="advantage-img">
+
+                        <img src="../static/images/client-img/low.svg" alt="">
+                            </div>
+                        <div class="col-12 col-sm-12 col-md-12 col-lg-8 col-xl-8">
+                                <h5 style="font-weight:bolder"> <b>Самые низкие цены</b></h5>
+                                <p>Проанализировав цены своих конкурентов,мы построили тарифные планы так,чтобы они были максимально дешевыми и качественными.</p>
 
                         </div>
                     </div>
@@ -153,21 +173,23 @@ height: 136px;">
             </div>
     </div>
 
-  <center><h1 style="font-weight:bolder;margin-bottom:3%;margin-top:3%;">Попробовать Mailer <span style="color:#1869AB;">сейчас</span>!</h1></center>
-
+    <center><h1 style="font-weight:bolder;margin-bottom:3%;margin-top:3%;">Mailer - один из лучших инструментов для бизнеса.</h1></center>
+    
 
         <div id="layer-2">
-              <form method="post" style="width:50%;align-self:flex-start;background:white; border-radius:15px;padding:1.5rem;">
+              <form method="post" id="try-mailer" style="width:50%;align-self:flex-start;background:white; border-radius:15px;padding:2.5rem;">
+                {% csrf_token %}
                 <div class="form-group" style="margin-bottom:0;">
                   <div class="row">
+                    <div class="col-12"><center><h3 style="font-weight:bolder;margin-bottom:8%;">Попробовать <span style="color:#1869AB;">сейчас</span>!</h3></center></div>
                     <div class="col-12 col-sm-12 col-md-12 col-lg-6 col-xl-6">
                       <input type="email" required name="mailer-test" class="form-control p-2" placeholder="Любой e-mail">
                     </div>
 
                     <div class="col-12 col-sm-12 col-md-12 col-lg-6 col-xl-6">
-                      <button type='submit' class="btn btn-outline-primary btn-block">Попробовать!</button>
-
+                      <button type='submit' class="btn btn-outline-primary btn-block">Отправить!</button>
                     </div>
+                    
                   </div>
 
                 </div>
@@ -183,24 +205,25 @@ height: 136px;">
                 <div class="card-deck mb-3 text-center">
                   <div class="card mb-4 box-shadow" style="padding-bottom:20px;">
                     <div class="card-header">
-                      <h4 class="my-0 font-weight-normal">Эконом</h4>
+                      <h4 class="my-0 font-weight-normal">Конверсия +</h4>
                     </div>
                     <div class="card-body">
-                      <h1 class="card-title pricing-card-title">15.599₽</h1>
+                      <h1 class="card-title pricing-card-title">17.599₽</h1>
                       <ul class="list-unstyled mt-3 mb-4">
-                        <li>1000 SMS</li>
-                        <li>2000 email-s</li>
-                        <li>База данных клиентов на 50 человек</li>
+                        <li><span class="text-success">30.000</span> e-mail для отправка</li>
+                        <li><span class="text-success">15.000</span> клиентов с tiu.ru</li>
+                        <li><span class="text-success">15</span> запросов средней цены товара</li>
+                        <li><span class="text-success">5</span> шаблонов для ваших писем</li>
+                        <li>Консультация по использованию Mailer</li>
+                        <li>&#12288;</li>
+                          　
                       </ul>
                     </div>
 
                     <center>
                             <div class="row" style="width:80%;">
-                                <div class="col-12 col-sm-12 col-md-12 col-lg-6 col-xl-6 pr-1 qr-btn">
-                                    <button  type="button" class="btn btn-lg btn-block btn-success" data-toggle="modal" data-target="#exampleModal1"><i class="fas fa-qrcode"></i></button>
-                                </div>
-                                <div class="col-12 col-sm-12 col-md-12 col-lg-6 col-xl-6 pl-0 buy-btn">
-                                        <a href="https://money.yandex.ru/to/410018707507727/15999" class="btn btn-lg btn-block btn-primary">Купить</a>
+                                <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
+                                    <a href='/buy_subscribe' class="btn btn-lg btn-block btn-primary">Купить</a>
                                 </div>
                             </div>
                         </center>
@@ -208,89 +231,90 @@ height: 136px;">
                 </div>
                   <div class="card mb-4 box-shadow" style="padding-bottom:20px;">
                     <div class="card-header">
-                      <h4 class="my-0 font-weight-normal">Бизнес</h4>
+                      <h4 class="my-0 font-weight-normal">Продавец года</h4>
                     </div>
                     <div class="card-body">
-                      <h1 class="card-title pricing-card-title">50.000₽</small></h1>
+                      <h1 class="card-title pricing-card-title">22.999₽</small></h1>
                       <ul class="list-unstyled mt-3 mb-4">
-                        <li>5.000 SMS</li>
-                        <li>15.000 email</li>
-                        <li>База данных клиентов на 100 человек</li>
-                        <li>Автоматическая настройка системы</li>
+                        <li><span class="text-success">70.000</span> e-mail для отправка</li>
+                        <li><span class="text-success">15.000</span> клиентов с tiu.ru</li>
+                        <li><span class="text-success">20.000</span> клиентов с avito.ru</li>
+                        <li><span class="text-success">10</span> запросов средней цены товара</li>
+                        <li><span class="text-success">20</span> шаблонов для ваших писем</li>
+                        <li>Консультация по использованию Mailer</li>
                       </ul>
                     </div>
 
                     <center>
                             <div class="row" style="width:80%;">
-                                <div class="col-12 col-sm-12 col-md-12 col-lg-6 col-xl-6 pr-1 qr-btn">
-                                    <button  type="button" class="btn btn-lg btn-block btn-success" data-toggle="modal" data-target="#exampleModal2"><i class="fas fa-qrcode"></i></button>
+                                <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
+                                    <a href='/buy_subscribe' class="btn btn-lg btn-block btn-primary">Купить</a>
                                 </div>
-                                <div class="col-12 col-sm-12 col-md-12 col-lg-6 col-xl-6 pl-0 buy-btn">
-                                        <a href="https://money.yandex.ru/to/410018707507727/50000" class="btn btn-lg btn-block btn-primary">Купить</a>
-                                </div>
+                                
                             </div>
                         </center>
 
                 </div>
                   <div class="card mb-4 box-shadow" style="padding-bottom:20px;">
                     <div class="card-header">
-                      <h4 class="my-0 font-weight-normal">Премиум</h4>
+                      <h4 class="my-0 font-weight-normal">Продажи 2.0</h4>
                     </div>
                     <div class="card-body">
-                      <h1 class="card-title pricing-card-title">110.000₽</h1>
+                      <h1 class="card-title pricing-card-title">25.999₽</h1>
                       <ul class="list-unstyled mt-3 mb-4">
-                            <li>15.000 SMS</li>
-                            <li>∞ email</li>
-                            <li>База данных клиентов на 250 человек</li>
-                            <li>Автоматическая настройка системы</li>
+                        <li><span class="text-success">100.000</span> e-mail для отправка</li>
+                        <li><span class="text-success">30.000</span> клиентов с tiu.ru</li>
+                        <li><span class="text-success">25.000</span> клиентов с avito.ru</li>
+                        <li><span class="text-success">15</span> запросов средней цены товара</li>
+                        <li><span class="text-success">50</span> шаблонов для ваших писем</li>
+                        <li>Консультация по использованию Mailer</li>
                       </ul>
                     </div>
                     <center>
                         <div class="row" style="width:80%;">
-                            <div class="col-12 col-sm-12 col-md-12 col-lg-6 col-xl-6 pr-1 qr-btn">
-                                <button  type="button" class="btn btn-lg btn-block btn-success" data-toggle="modal" data-target="#exampleModal3"><i class="fas fa-qrcode"></i></button>
+                            <div class="col-12 col-sm-12 col-md-12 col-lg-12 col-xl-12">
+                                <a href='/buy_subscribe' class="btn btn-lg btn-block btn-primary">Купить</a>
                             </div>
-                            <div class="col-12 col-sm-12 col-md-12 col-lg-6 col-xl-6 pl-0 buy-btn">
-                                    <a href="https://money.yandex.ru/to/410018707507727/110000" class="btn btn-lg btn-block btn-primary">Купить</a>
-                            </div>
+                            
                         </div>
                     </center>
 
                 </div>
                 </div>
 
+                <center> <h4>ИЛИ ВЫ МОЖЕТЕ <br> <a href="/buy_subscribe">СОЗДАТЬ СВОЙ ТАРИФ</a></h4>  </center>
+
               </div>
+
+              <hr>
 
               <center><h1 style="font-weight:bolder;margin-bottom:3%;margin-top:3%;">Наши контакты</h1></center>
 
 
     <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2305.6903737867847!2d20.511174415266918!3d54.6974760803501!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x46e3163fa351196d%3A0x5a2de2c171593373!2z0YPQuy4g0JHQvtCz0LTQsNC90LAg0KXQvNC10LvRjNC90LjRhtC60L7Qs9C-LCA4Nywg0JrQsNC70LjQvdC40L3Qs9GA0LDQtCwg0JrQsNC70LjQvdC40L3Qs9GA0LDQtNGB0LrQsNGPINC-0LHQuy4sIDIzNjAzOQ!5e0!3m2!1sru!2sru!4v1586464681821!5m2!1sru!2sru"  height="450" frameborder="0" style="border:0;" allowfullscreen="" aria-hidden="false" tabindex="0"></iframe>
 
-    <header id="footer">
+    <footer id="footer">
         <center>
             <div class="row" style='width:90%;'>
 
-                  <div class="col-lg-3 col-xl-3 col-6 col-sm-6 col-md-6" style="background: url(../static/images/logo-white.svg.) center no-repeat ;background-size:contain;width: 126px;
+                  <div class="col-lg-2 col-xl-2 col-6 col-sm-6 col-md-6" style="background: url(../static/images/logo-white.svg) center no-repeat ;background-size:contain;width: 126px;
       height: 136px;">
 
                   </div>
                   <div class="col-lg-3 col-xl-3 col-6 col-sm-6 col-md-6 " style="font-style: normal;font-weight: normal;font-size: 14px;line-height: 19px;color: #BBBBBB;">
                       <span style="padding:5%;
-                      background: linear-gradient(146.83deg, #252839 39.23%, #252839 97.46%);
                       border-radius:15px;">Помогаем вам и вашему бизнесу с 2018 года.</span>
                   </div>
 
 
                   <div class="col-lg-3 col-xl-3 header__hide " style="font-weight: 500;font-size: 14px;line-height: 19px;color: #BBBBBB;">
                     <span style="padding:5%;
-                    background: linear-gradient(146.83deg, #252839 39.23%, #252839 97.46%);
                     border-radius:15px;"> г.Калининград Ул.Богдана Хмельницкого,87</span>
                   </div>
 
-                  <div class="col-lg-3 col-xl-3 col-sm-12 col-12 col-md-12">
-                      <a href="tel:+79097990305" style="text-decoration:none;color:white;font-weight:bolder;font-size: 20px;padding:5%;
-                      background: linear-gradient(146.83deg, #252839 39.23%, #252839 97.46%);
-                      border-radius:15px;">+7 909 799 03 05</a>
+                  <div class="col-lg-4 col-xl-4 col-sm-12 col-12 col-md-12">
+                      <a href="tel:+79097990305" style="text-decoration:none;color:white;font-weight:bolder;font-size: 20px;width:100%;
+                       border-radius:15px;">+7 909 799 03 05</a>
                   </div>
 
 
@@ -298,11 +322,12 @@ height: 136px;">
 
             </div>
         </center>
-        </header>
+        </footer>
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js" crossorigin="anonymous"></script>    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
     <script src="../static/js/client-page.js"></script>
+    {% include "preloader-script.html" %}
 </body>
 </html>

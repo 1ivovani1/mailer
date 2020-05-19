@@ -1,0 +1,24 @@
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js" ></script>
+<script type="text/javascript">
+$(window).on('load', function () {
+  $preloader = $('.load-wrapper'),
+  $loader = $preloader.find('.load');
+  $loader.fadeOut();
+  $preloader.delay(350).fadeOut('slow');
+});
+
+
+const all_forms = document.querySelectorAll('form')
+all_forms.forEach(item => {
+    item.addEventListener('submit',(e) => {
+      e.preventDefault()
+      $preloader = $('.load-wrapper'),
+      $loader = $preloader.find('.load');
+      $loader.fadeIn();
+      $preloader.delay(350).fadeIn('slow');
+  
+      item.submit()
+    })
+})
+
+</script>

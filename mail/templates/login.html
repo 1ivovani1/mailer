@@ -1,15 +1,27 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <link href="../static/images/mail.ico" rel="icon" type="image/x-icon">
+
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Логин</title>
+    <style>
+      body{
+        background:url('../static/images/pattern.png') center no-repeat;
+        background-size:cover;
+      }
+      
+    </style>
+    {% include "preloader-styles.html" %}
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
 </head>
-<body class="text-center" style="height:100vh;position: relative;">
-        <a href="/" style="position:absolute;top:10px;left:10px;">Вернуться</a>
-        <form style="width: 100%;max-width: 330px;padding: 15px;margin: auto;height:100%;display:flex;align-items:center;flex-direction:column;justify-content:center;" method="POST">
+<body class="text-center" style="height:100vh;position: relative;display:flex;align-items:center;justify-content:center;flex-direction:column;">
+    {% include "preloader-html.html" %}  
+  
+  <a href="/" class="btn btn-secondary" style="position:absolute;top:10px;left:10px;">Вернуться</a>
+        <form class='border border-primary' style="width: 100%;max-width: 330px;padding: 15px;margin: auto;display:flex;align-items:center;flex-direction:column;justify-content:center;background:white; border-radius:15px;" method="POST">
           {% csrf_token %}
           <img class="mb-4" src="../static/images/email.svg" alt="" width="72" height="72">
       <h1 class="h3 mb-3 font-weight-normal">Войдите,чтобы продолжить!</h1>
@@ -21,14 +33,14 @@
       
     </form>
     {% for message in messages %}
+      <center class="messages">
+          <div {% if message.tags == 'error' %} class="alert message alert-success" {% else %} class="alert message alert-danger" {% endif %} role="alert">
+              {{ message }}
+          </div>
+        </center>
+      {% endfor %}
 
-  <center><h2>{{ message }}</h2></center>
-
-{% endfor %}
-
-    
-
-    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+    {% include "preloader-script.html" %}
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
 </body>

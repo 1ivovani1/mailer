@@ -12,13 +12,19 @@ header{
 
 }
 
+footer .col-lg-3,footer .col-lg-4{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
 #layer-1{
     width: 100%;
     min-height: 794px;
     background-size:cover;
     position: relative;
     padding:0 5%;
-    background: url(../images/client-img/bg-main.jpg) center no-repeat;
+    background: url(../images/client-img/main-bg.jpeg) center no-repeat;
     background-size:cover;
 }
 
@@ -30,7 +36,61 @@ header .col-lg-3{
 
 }
 
+.success-message-in-form {
+    padding-top: 10px;
+    margin: 0 auto;
+    font-size: 1.5rem;
+    color: black; 
+}
 
+.load-wrapper{
+    background: white;
+    position: fixed;
+    top:0;
+    left:0;
+    right:0;
+    bottom:0;
+    z-index: 99999999;
+  }
+  
+  .load{position:fixed;top:50%;left:50%;transform:translate(-50%, -50%);
+    /*change these sizes to fit into your project*/
+    width:100px;
+    height:100px;
+  }
+  .load hr{border:0;margin:0;width:40%;height:40%;position:absolute;border-radius:50%;animation:spin 2s ease infinite}
+  
+  .load :first-child{background:#19A68C;animation-delay:-1.5s}
+  .load :nth-child(2){background:#F63D3A;animation-delay:-1s}
+  .load :nth-child(3){background:#FDA543;animation-delay:-0.5s}
+  .load :last-child{background:#193B48}
+  
+  @keyframes spin{
+    0%,100%{transform:translate(0)}
+    25%{transform:translate(160%)}
+    50%{transform:translate(160%, 160%)}
+    75%{transform:translate(0, 160%)}
+  }
+
+@media screen and (max-width:1100px){
+    #try-mailer{
+        width: 90% !important;
+        align-self: center !important;
+    }
+
+    #try-mailer button{
+        margin-top: 10px;
+    }
+    
+    footer a{
+        padding-bottom:20px;
+    }
+    #layer-1{
+        background: url('../images/client-img/mobile.jpeg') center no-repeat !important;
+        background-size:cover;
+        background-attachment: fixed;
+    }
+}
 
 #main-info{
     font-family: 'Noto Sans', ;
@@ -53,7 +113,7 @@ header .col-lg-3{
     font-size:14px;
     line-height:19px;
     padding:0;
-    margin-top: 20px;
+    margin-top: 10px;
 }
 .main-top-row{
     width: 80%;
@@ -63,7 +123,7 @@ header .col-lg-3{
 #layer-2{
     width: 100%;
     background: white;
-    padding: 0 10% 0 10%;
+    padding: 0 10%;
     background: url(../images/client-img/mail-try.jpg) center  no-repeat;
     background-size:cover;
 }
@@ -285,8 +345,8 @@ iframe{
   }
 .we_need_flex img{
     display: block;
-    border-radius:100%;
-    box-shadow: 0px 4px 10px rgba(25, 113, 168, 0.5);
+    height: 80px;
+    width: 80px;
 }
 
 #layer-5-little-triangle{

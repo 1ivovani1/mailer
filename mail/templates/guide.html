@@ -8,76 +8,92 @@
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.1/css/all.css"
   integrity="sha384-gfdkjb5BdAXd+lj+gudLWI+BXq4IuLW5IT+brZEZsLFm++aCMlF1V92rMkPaX4PP" crossorigin="anonymous">  
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
-   
+    {% include "preloader-styles.html" %}
+    <link href="../static/images/mail.ico" rel="icon" type="image/x-icon">
     <title>Инструкция</title>
 </head>
 <body>
 
-        <nav class="navbar navbar-light bg-light sticky-top">
-                <form class="form-inline">
-                  <a class="btn btn-primary mr-2" href="/main">Главная</a>  
-                  <a class="btn btn-success" href="/logout">Выйти</a>
-                  {% if is_paid == False %}
-                  <a class="btn btn-danger ml-2" href="/buy_subscribe">Купить подписку</a>
-                  {% endif %}
-                </form>
-                <a class="navbar-brand" href="#">
-                  <img src="../static/images/logo.png" height="30" alt="">
-                </a>
+        {% include "preloader-html.html" %}
+
+        <nav class="navbar navbar-expand-lg navbar-light bg-light sticky-top">
+                <a class="navbar-brand" href="/">
+                    <img src="../static/images/logo.png" height="30" alt="">
+                  </a>    
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                  <span class="navbar-toggler-icon"></span>
+                </button>
+              
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                  <ul class="navbar-nav mr-auto">
+                        <li class="nav-item">
+                                <a class="nav-link" href="/main">Главная📺</a>
+                          </li>    
+                        <li class="nav-item">
+                              <a class="nav-link" href="/buy_subscribe">Товары💶</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="/logout">Выйти📛</a>
+                        </li>
+                    </ul>
+                 
+                    <form class="my-2 my-lg-0">
+                            <p><b>{{request.user.username}}</b><br>
+                              Баланс:<span class="text-danger">{{balance}}💰</span>
+                               <br>
+                               <a href='#' data-toggle="modal" data-target="#payment-modal">Пополнить</a>   
+                            </p> 
+                        </form>
+
+                </div>
               </nav>
 
+
+              <div class="modal fade" id="payment-modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal-dialog" role="document">
+                      <div class="modal-content">
+                        <div class="modal-header">
+                          <h5 class="modal-title" id="exampleModalLabel">Пополнить баланс</h5>
+                          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                          </button>
+                        </div>
+                        <form method='POST' id='payment-form'>
+                          <div class="modal-body">
+                            <div class="form-group m-0">
+                              <input type="number" name='sum' class="form-control pay" placeholder="Сумма">
+                              <input type="hidden" name='add_balance'>
+                            </div>
+                          </div>
+                        <div class="modal-footer">
+                          <button type="button" type='submit' class="btn btn-outline-primary btn-block pay_button" >Подтвердить</button>
+                        </div>
+                      </form>
+                      </div>
+                    </div>
+                  </div>
+          
+                  {% for message in messages %}
+              <center class="messages">
+                <div {% if message.tags == 'error' %} class="alert message alert-success" {% else %} class="alert message alert-danger" {% endif %} role="alert">
+                    {{ message }}
+                </div>
+              </center>
+      {% endfor %}
+
         <div class="container mt-4">
-            <center> <h1><b>Инструкция по использования Mailer</b></h1></center>
+
+            <center> <h1><b>Инструкция по использования Mailer</b> {% if request.user.is_admin %} <a href="/add_guide" style="text-decoration: none;"><i class="fas fa-plus-circle"></i></a> {% endif %}</h1></center>
             
             <div class="row mt-4">
-                <div class="col-12 col-sm-12 col-md-12 col-lg-6 col-xl-6">
-                    <p><b style="font-size:24px;">Одиночная рассылка</b> <br>
-                    1. Определитесь с тематикой вашего сообщения <br>
-                    2. Введите название email <br>
-                    3. Нажмите отправить <br>
-                    <img src="../static/images/1.png" class="d-block mt-2 border border-primary" style="width:100%;height:auto;" alt="">
-            </p>
+              {% for guide in guides %}  
+              <div class="col-12 col-sm-12 col-md-12 col-lg-6 col-xl-6">
+                    <p><b style="font-size:24px;">{{guide.name}}</b> <br>
+                      {{guide.text}}
+                    <img src="{{guide.image.url}}" class="d-block mt-2 border border-primary" style="width:100%;height:auto;" alt="">
+                    </p>
                 </div>
-                <div class="col-12 col-sm-12 col-md-12 col-lg-6 col-xl-6">
-                        <p><b style="font-size:24px;">Массовая рассылка</b> <br>
-                            1. Определитесь с тематикой вашего сообщения <br>
-                            2. Загрузите txt файл,в котором данные храняться в формате Имя - Почта <br>
-                            3. Нажмите отправить
-                            <img src="../static/images/2.png" class="d-block mt-2 border border-primary" style="width:100%;height:auto;" alt="">
-                        </p>
-                </div>
-
-                <div class="col-12 col-sm-12 col-md-12 col-lg-6 col-xl-6">
-                        <p><b style="font-size:24px;">Изменение конфигурации</b> <br>
-                            1. Введите все данные,которые необходимы(Порт,Хост,Имя пользователя,Пароль,SSL,TLS) <br>
-                            2. Например,для Mail.ru(Хост=smtp.mail.ru,Порт=465,Логин,Пароль,Галочка у SSL) <br>
-                            3. Например,для Gmail(Хост=smtp.gmail.com,Порт=587,Логин,Пароль,Галочка у TLS) <br>
-                            4. Нажмите изменить
-                            <img src="../static/images/4.png" class="d-block mt-2 border border-primary" style="width:100%;height:auto;" alt="">
-                        </p>
-                </div>
-
-                <div class="col-12 col-sm-12 col-md-12 col-lg-6 col-xl-6">
-                        <p><b style="font-size:24px;">Выбор шаблона</b> <br>
-                            1. Загрузите шаблон <br>
-                            2. Вы можете посмотреть свой шаблон,нажав на конпку посмотреть <br>
-                            3. Выберите активный шаблон,который будете отсылать по email
-                            <br>
-                            <br>
-                            <br>
-                            <br>
-                            <br>
-                            <img src="../static/images/3.png" class="d-block mt-2 border border-primary" style="width:100%;height:auto;" alt="">
-                        </p>
-                </div>
-
-                <div class="col-12 col-sm-12 col-md-12 col-lg-6 col-xl-6">
-                        <p><b style="font-size:24px;">Как должен выглядеть txt файл загрузки</b> <br>
-                           
-                            <img src="../static/images/txt.png" class="d-block mt-2 border border-primary" style="width:100%;height:auto;" alt="">
-                        </p>
-                </div>
-
+                {% endfor %}
             </div>
             
             <hr>
@@ -89,9 +105,10 @@
         </div>
 
 
-        <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+        {% include "preloader-script.html" %}
         <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
         <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>    
+        {% include "payment-widget.html" %}
 
 </body>
 </html>

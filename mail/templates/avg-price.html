@@ -1,0 +1,174 @@
+<script type="text/javascript">
+    const getter = document.querySelector('#get_average_sum'),
+          what_price = document.getElementById('what_price');
+      what_price.addEventListener('click',(e) => {
+          e.preventDefault();
+          const data = new FormData(getter);
+           let body1 = {};
+           data.forEach((val,key) => {
+             body1[key] = val;
+           });
+           
+           $preloader = $('.load-wrapper'),
+            $loader = $preloader.find('.load');
+            $loader.fadeIn();
+            $preloader.delay(350).fadeIn('slow');
+
+           postData1(body1)
+           .then(response => {
+             if (response.status !== 200) {
+               throw new Error('В матрице сбой\nНе беспокойтесь,Нео уже в пути!');
+                $preloader = $('.load-wrapper'),
+                $loader = $preloader.find('.load');
+                $loader.fadeOut();
+                $preloader.delay(350).fadeOut('slow');
+                setTimeout(()=> {
+                    createErrorMessage('Неизвестная ошибка на сервере')
+                    delete_all_msg()
+                },1000)
+            }
+              response.json().then(resolve => {
+                if ('not_enough' in resolve){
+                    setTimeout(() => {
+                        createErrorMessage('У вас не осталось запросов!')
+                        delete_all_msg()
+                    },1000)
+                    
+                }else{
+
+                myChart3 = new Chart(ctx3, {
+                  type: 'line',
+                  data: {
+                      labels: resolve.prices,
+                      datasets: [{
+                          label: 'Цена',
+                          data: resolve.prices,
+                          backgroundColor: [
+                            'rgba(255, 206, 86, 0.5)',
+                          ],
+                          borderColor: [
+                              'rgba(255, 99, 132, 1)',
+                          ],
+                          borderWidth: 1
+                      }]
+                  },
+                  options: {
+                      responsive:true,
+                      scales: {
+                          yAxes: [{
+                              ticks: {
+                                  beginAtZero: true
+                              }
+                          }]
+                      }
+                  }
+                });
+                
+                const value_of_avg = document.getElementById('average_span');
+                let counter = 0;
+                resolve.prices.forEach(item => {
+                    counter += Number(item)
+                })                
+                value_of_avg.textContent = Math.ceil(counter / resolve.prices.length); 
+            }
+                document.getElementById('average_query').value = '';
+            
+                $preloader = $('.load-wrapper'),
+                $loader = $preloader.find('.load');
+                $loader.fadeOut();
+                $preloader.delay(350).fadeOut('slow');
+            
+              })
+              .catch(error => {
+                  console.error(error)
+                  $preloader = $('.load-wrapper'),
+                  $loader = $preloader.find('.load');
+                  $loader.fadeOut();
+                  $preloader.delay(350).fadeOut('slow');
+                  setTimeout(()=> {
+                    createErrorMessage('Неизвестная ошибка на сервере')
+                    delete_all_msg()
+                },1000)
+                  
+              })
+              
+             
+          })
+           .catch(error => {
+             console.error(error);
+             $preloader = $('.load-wrapper'),
+             $loader = $preloader.find('.load');
+             $loader.fadeOut();
+             $preloader.delay(350).fadeOut('slow');
+             setTimeout(()=> {
+                    createErrorMessage('Неизвестная ошибка на сервере')
+                    delete_all_msg()
+                },1000)
+             
+            })
+      })
+      
+    function getCookie1(name) {
+    let cookieValue = null;
+    if (document.cookie && document.cookie !== '') {
+        let cookies = document.cookie.split(';');
+        for (var i = 0; i < cookies.length; i++) {
+            var cookie = cookies[i].trim();
+            if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                break;
+                }
+             }
+         }
+        return cookieValue;
+    }
+  let csrftoken1 = getCookie1('csrftoken');
+  
+  const postData1 = (body) => {
+         return fetch('main',{
+           method:'POST',
+           headers:{
+             'Content-Type':'application/JSON',
+             'X-CSRFToken':csrftoken
+           },
+           body:JSON.stringify(body)
+         })
+       }
+
+      var ctx3 = document.getElementById('average').getContext('2d');
+      var myChart3 = new Chart(ctx3, {
+          type: 'line',
+          data: {
+              labels: [],
+              datasets: [{
+                  label: 'Цена',
+                  data: [],
+                  backgroundColor: [
+                    'rgba(255, 206, 86, 0.5)',
+                  ],
+                  borderColor: [
+                      'rgba(255, 99, 132, 1)',
+                  ],
+                  borderWidth: 1
+              }]
+          },
+          options: {
+              responsive:true,
+              scales: {
+                  yAxes: [{
+                      ticks: {
+                          beginAtZero: true
+                      }
+                  }]
+              }
+          }
+      });
+      
+const createErrorMessage = (message) => {
+    document.querySelector('.container-fluid').insertAdjacentHTML('beforebegin',`<center><div class="alert message alert-danger" role="alert">
+                    ${message}
+                </div></center>`)
+    
+}
+
+</script>

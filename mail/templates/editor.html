@@ -1,0 +1,88 @@
+<html>
+<head>
+    <link href="../static/images/mail.ico" rel="icon" type="image/x-icon">
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1.0, maximum-scale=1.0"/>
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.4.0/css/font-awesome.min.css" rel="stylesheet" type="text/css" /><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.25.0/codemirror.min.css"><link href="https://cdnjs.cloudflare.com/ajax/libs/froala-editor/2.6.0/css/froala_editor.pkgd.min.css" rel="stylesheet" type="text/css" /><link href="https://cdnjs.cloudflare.com/ajax/libs/froala-editor/2.6.0/css/froala_style.min.css" rel="stylesheet" type="text/css" />
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <style>body {
+        text-align: center;
+        padding: 10% 0;
+      }
+      
+      div#editor {
+        width: 81%;
+        margin: auto;
+        text-align: left;
+      }
+      
+      pre#preview {
+        padding: 10px;
+        background: #efefef;
+        white-space: pre-line;
+        line-height: 1.5;
+      }
+      
+      @media screen and (max-width:1100px){
+          #back{
+              margin-top: 20px;
+          }
+      }
+
+      </style>
+      {% include "preloader-styles.html" %}
+</head>
+<body>
+    {% for message in messages %}
+        <center class="messages">
+        <div {% if message.tags == 'error' %} class="alert message alert-success" {% else %} class="alert message alert-danger" {% endif %} role="alert">
+            {{ message }}
+        </div>
+      </center>
+  {% endfor %}
+        {% include "preloader-html.html" %}
+    <form method='POST'>
+        {% csrf_token %}
+  <div id="editor">
+    <div id='edit' style="margin-top: 30px;">
+            <h1><span style="font-family: Impact,Charcoal,sans-serif;">Редактор для создания шаблонов ваших писем</span></h1>
+            <p><span style="font-family: Tahoma,Geneva,sans-serif;">Чтобы начать создавать ваш шаблон,вам необходимо просто стереть этот текст!</span>🙈</p>    </div>
+
+    <input type="text" name="filename" placeholder="Название файла..." class="form-control mt-4">
+
+    <div class="row mt-4">
+        <div class="col-12 col-sm-12 col-md-12 col-lg-6 col-xl-6">
+            <button type="submit" class="btn btn-block btn-outline-primary ">Сохранить шаблон и использовать для отправки</button>
+        </div>
+        <div class="col-12 col-sm-12 col-md-12 col-lg-6 col-xl-6">
+            <a href="/main" id="back" class="btn btn-block btn-outline-success">Вернуться</a>
+        </div>
+    </div>
+
+    <textarea name="code_of_template" style='display:none;'></textarea>
+
+    <pre id="preview" style="display: none;"></pre>
+  </div>
+</form>
+
+{% include "preloader-script.html" %}
+  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script><script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.25.0/codemirror.min.js"></script><script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/codemirror/5.25.0/mode/xml/xml.min.js"></script><script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/froala-editor/2.6.0//js/froala_editor.pkgd.min.js"></script>
+  <script type="text/javascript">
+    $(function(){
+  $('#edit').on('froalaEditor.contentChanged froalaEditor.initialized', function (e, editor) {
+    $('#preview').text(editor.codeBeautifier.run(editor.html.get()))
+  }).froalaEditor();
+});
+
+    const form = document.querySelector('form'),
+          textarea = document.querySelector('textarea'),
+          code = document.querySelector('#preview');
+    form.addEventListener('submit',(e) => {
+        e.preventDefault();
+        textarea.textContent = code.textContent;
+        form.submit()
+    })
+
+  </script>
+</body>
+</html>

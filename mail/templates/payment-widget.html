@@ -1,0 +1,83 @@
+<script src="https://widget.unitpay.money/unitpay.js"></script>
+<script type="text/javascript">
+
+    let ajax_obj = null
+
+    const pay = document.querySelector('.pay'),
+          form = document.querySelector('#payment-form'),
+          pay_button = document.querySelector('.pay_button')
+    pay.addEventListener('input',(e) => {
+        e.preventDefault();
+        const data = new FormData(form);
+         let body = {};
+         data.forEach((val,key) => {
+           body[key] = val;
+         });
+         
+         postData(body)
+         .then(response => {
+           if (response.status !== 200) {
+             throw new Error('В матрице сбой\nНе беспокойтесь,Нео уже в пути!');
+           }
+            response.json().then(resolve => {
+                ajax_obj = resolve
+                pay_button.addEventListener('click',payment)
+            })
+            .catch(error => {
+                console.error(error)
+            })
+            
+           
+        })
+         .catch(error => {
+           console.error(error);
+          })
+    })
+    
+    function getCookie(name) {
+    let cookieValue = null;
+    if (document.cookie && document.cookie !== '') {
+        let cookies = document.cookie.split(';');
+        for (var i = 0; i < cookies.length; i++) {
+            var cookie = cookies[i].trim();
+            if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                break;
+                }
+             }
+         }
+        return cookieValue;
+    }
+let csrftoken = getCookie('csrftoken');
+
+       const postData = (body) => {
+         return fetch('main',{
+           method:'POST',
+           headers:{
+             'Content-Type':'application/JSON',
+             'X-CSRFToken':csrftoken
+           },
+           body:JSON.stringify(body)
+         })
+       }
+
+    function payment() {
+            let payment = new UnitPay();
+            payment.createWidget({
+                publicKey: "249511-86de1",
+                sum: ajax_obj.sum,
+                account: '{{request.user.username}}',
+                domainName: "unitpay.money",
+                signature: ajax_obj.signature,
+                desc: 'Пополнение баланса',
+                locale: "ru",
+            });
+            payment.success(function (params) {
+                console.log('Успешный платеж');
+            });
+            payment.error(function (message, params) {
+                console.log(message);
+            });
+            return false;
+        };
+</script>

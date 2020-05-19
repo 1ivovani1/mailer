@@ -9,6 +9,79 @@ template_change_cards.forEach((item,index) => {
     })
 })
 
+window.addEventListener('DOMContentLoaded',()=> {
+  let sent = document.getElementById('sent_mails'),
+      unsent = document.getElementById('unsent_mails'),
+      parsed = document.getElementById('parsed'),
+      unparsed = document.getElementById('unparsed');
+
+      
+var ctx2 = document.getElementById('parsing_statistics').getContext('2d');
+var myChart2 = new Chart(ctx2, {
+    type: 'pie',
+    data: {
+        labels: ['Не распарсились', 'Распарсились'],
+        datasets: [{
+            label: 'Parsing',
+            data: [Number(unparsed.textContent), Number(parsed.textContent)],
+            backgroundColor: [
+              'rgba(255, 206, 86, 0.5)',
+              'rgba(153, 102, 255, 0.5)',
+            ],
+            borderColor: [
+                'rgba(255, 99, 132, 1)',
+                'rgba(75, 192, 192, 1)',
+            ],
+            borderWidth: 0
+        }]
+    },
+    options: {
+        responsive:true,
+        scales: {
+            yAxes: [{
+                ticks: {
+                    beginAtZero: true
+                }
+            }]
+        }
+    }
+});
+
+
+var ctx1 = document.getElementById('email_statistics').getContext('2d');
+var myChart1 = new Chart(ctx1, {
+    type: 'pie',
+    data: {
+        labels: ['Неотправленные', 'Отправленные'],
+        datasets: [{
+            label: 'Emails',
+            data: [Number(unsent.textContent), Number(sent.textContent)],
+            backgroundColor: [
+                'rgba(255, 99, 132, 0.5)',
+                'rgba(75, 192, 192, 0.5)'
+            ],
+            borderColor: [
+                'rgba(230, 230, 230, 1)',
+                'rgba(230, 230, 230, 1)',
+            ],
+            borderWidth: 0
+        }]
+    },
+    options: {
+        responsive:true,
+        scales: {
+            yAxes: [{
+                ticks: {
+                    beginAtZero: true
+                }
+            }]
+        }
+    }
+});
+
+
+})
+
 const email_txt_input_text = document.getElementById('email_txt_text'),
       hidden_input_text = document.getElementById('email_txt_filename_text'),
       email_txt_label_text = document.getElementById('email_txt_label_text');
@@ -19,6 +92,7 @@ email_txt_input_text.addEventListener('change',() => {
       hidden_input_text.value = filename.substr(filename.length - 3);
     },1000) 
 })
+ 
 
 const email_txt_input = document.getElementById('email_txt'),
       hidden_input = document.getElementById('email_txt_filename'),
@@ -45,17 +119,28 @@ html_txt_input.addEventListener('change',() => {
 })
 
 
-const sms_txt_input = document.getElementById('sms_txt_file'),
-      hidden_sms_input = document.getElementById('sms_txt_filename'),
-      sms_txt_label = document.getElementById('sms_txt_label');
+const mailRuBtn = document.getElementById('mail_ru'),
+      gmailComBtn = document.getElementById('gmail_com');
+  
+const sendingForm = document.querySelector('.sending-form'),
+      host = document.querySelector('.host'),
+      port = document.querySelector('.port'),
+      is_ssl = document.querySelector('.use_ssl'),
+      is_tls = document.querySelector('.use_tls');
 
-sms_txt_input.addEventListener('change',() => {
-    setTimeout(() => {
-      const filename = sms_txt_label.textContent;
-      hidden_sms_input.value = filename.substr(filename.length - 3);
-    },1000) 
+mailRuBtn.addEventListener('click',() => {
+    host.value = 'smtp.mail.ru';
+    port.value = 465;
+    is_ssl.checked = true;
+    is_tls.checked = false;
 })
 
+gmailComBtn.addEventListener('click',() => {
+  host.value = 'smtp.gmail.com';
+  port.value = 587;
+  is_ssl.checked = false;
+  is_tls.checked = true;
+})
 
 
 

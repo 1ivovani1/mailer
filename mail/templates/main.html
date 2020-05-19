@@ -11,6 +11,26 @@
     <title>Mailer</title>
     <style>
     
+@media screen and (max-width:1100px){
+  #gmail_com{
+    margin-top: 30px;
+  }
+  #nav-get{
+    padding:1% !important; 
+  }
+  #mobile-best-price{
+    display: block !important;
+  }
+}
+
+      #mail_ru,#gmail_com{
+        transition: 0.4s;
+      }
+      #mail_ru:hover,#gmail_com:hover{
+        transform: scale(1.1);
+        cursor:pointer;
+      }
+
 
       .file-input {
   display: inline-block;
@@ -57,34 +77,81 @@
   opacity: 1;
 }
 
+
 @media screen and (max-width:1100px){
   img[style="height:200px;width:200px;"]{
     display: none;
   }
 }
-  
 </style>
-    <link href="../static/mail.ico" rel="icon" type="image/x-icon">
+
+{% include "preloader-styles.html" %}
+
+<link href="../static/images/mail.ico" rel="icon" type="image/x-icon">
 </head>
 <body>
-    <nav class="navbar navbar-light bg-light sticky-top">
-        <form class="form-inline">
-          <a class="btn btn-primary mr-2" href="/guide">Инструкция</a>  
-          <a class="btn btn-success" href="/logout">Выйти</a>
-          {% if is_paid == False %}
-          <a class="btn btn-danger ml-2" href="/buy_subscribe">Подписка</a>
-          {% endif %}
-        </form>
-        <a class="navbar-brand" href="#">
-          <img src="../static/logo.png" height="30" alt="">
-        </a>
-      </nav>
+    
+      {% include "preloader-html.html" %}
+    
+      <nav class="navbar navbar-expand-lg navbar-light bg-light sticky-top">
+          <a class="navbar-brand" href="/">
+              <img src="../static/images/logo.png" height="30" alt="">
+            </a>    
+          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+        
+          <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav mr-auto">
+                <li class="nav-item">
+                    <a class="nav-link" href="/guide">Инструкция❓</a>
+                  </li>
+                  <li class="nav-item">
+                        <a class="nav-link" href="/buy_subscribe">Товары💶</a>
+                  </li>
+                  <li class="nav-item">
+                      <a class="nav-link" href="/logout">Выйти📛</a>
+                  </li>
+              </ul>
+              
+              <form class="my-2 my-lg-0">
+                  <p><b>{{request.user.username}}</b><br>
+                    Баланс:<span class="text-danger">{{balance}}💰</span>
+                     <br>
+                     <a href='#' data-toggle="modal" data-target="#payment-modal">Пополнить</a>   
+                  </p> 
+              </form>
 
+          </div>
+        </nav>
 
+        <div class="modal fade" id="payment-modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title" id="exampleModalLabel">Пополнить баланс</h5>
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                  </button>
+                </div>
+                <form method='POST' id='payment-form'>
+                  <div class="modal-body">
+                    <div class="form-group m-0">
+                      <input type="number" name='sum' class="form-control pay" placeholder="Сумма">
+                      <input type="hidden" name='add_balance'>
+                    </div>
+                  </div>
+                <div class="modal-footer">
+                  <button type="button" type='submit' class="btn btn-outline-primary btn-block pay_button" >Подтвердить</button>
+                </div>
+              </form>
+              </div>
+            </div>
+          </div>
 
       {% for message in messages %}
-              <center>
-                <div class="alert alert-success message" role="alert">
+              <center class="messages">
+                <div {% if message.tags == 'error' %} class="alert message alert-success" {% else %} class="alert message alert-danger" {% endif %} role="alert">
                     {{ message }}
                 </div>
               </center>
@@ -97,9 +164,10 @@
           <nav>
               <div class="nav nav-tabs" id="nav-tab" role="tablist">
                 <a class="nav-item nav-link active" id="nav-home-tab" data-toggle="tab" href="#nav-home" role="tab" aria-controls="nav-home" aria-selected="true"> Emails</a>
-                <a class="nav-item nav-link" id="nav-profile-tab" data-toggle="tab" href="#nav-profile" role="tab" aria-controls="nav-profile" aria-selected="false">SMS</a>
+                <a class="nav-item nav-link" id="nav-profile-tab" data-toggle="tab" href="#nav-profile" role="tab" aria-controls="nav-profile" aria-selected="false">Сбор клиентов</a>
+                <a class="nav-item nav-link" id="nav-get-tab" data-toggle="tab" href="#nav-get" role="tab" aria-controls="nav-get" aria-selected="false">Средняя стоимость товара</a>
                 <a class="nav-item nav-link" id="nav-template-tab" data-toggle="tab" href="#nav-templates" role="tab" aria-controls="nav-template" aria-selected="false">Мои шаблоны</a>
-              
+                <a class="nav-item nav-link" id="nav-statistic-tab" data-toggle="tab" href="#nav-statistic" role="tab" aria-controls="nav-statistic" aria-selected="false">Статистика</a>
               </div>
             </nav>
 
@@ -116,7 +184,7 @@
                         <div class="col-12 col-sm-12 col-ms-12 col-lg-9 col-xl-9">
                           <div class="tab-content" id="v-pills-tabContent">
                             <div class="tab-pane fade show active" id="v-pills-home" role="tabpanel" aria-labelledby="v-pills-home-tab">
-                        {% if is_paid == True %}
+                        
                           <div class="row">
                             <div class="col-12 col-sm-12 col-md-12 col-lg-6 col-xl-6">
                               <center><h2 class="mt-4">Отправка HTML</h2></center>
@@ -169,22 +237,10 @@
                             </div>
                           </div>          
                           
-                        {% else %}
-                                    <div class="row">
-                                      <div class="col-12 col-sm-12 col-md-12 col-lg-8 col-xl-8">
-                                        <h2>К сожалению,этот раздел доступен тем,кто купил подписку!</h2>
-                                        <p>Вы можете оформить подписку здесь:</p><a class='btn btn-danger btn-lg text-light' href="/buy_subscribe">Купить</a>
-                                      </div>
-                                      <div class="col-12 col-sm-12 col-md-12 col-lg-0 col-xl-0" style='display:flex;align-items:center;justify-content:center;'>
-                                        <img style="height:200px;width:200px;" src="https://image.flaticon.com/icons/svg/2746/2746011.svg" alt="">
-                                      </div>
-                                    </div>
-                                    
-                        {% endif %}
-    
+                        
                             </div>
                             <div class="tab-pane fade pb-4" id="v-pills-profile" role="tabpanel" aria-labelledby="v-pills-profile-tab">
-                              {% if is_paid == True %}  
+                              
                               <div class="row">
                                 <div class="col-12 col-sm-12 col-md-12 col-lg-6 col-xl-6">
                                   <center>
@@ -251,17 +307,7 @@
                                 </div>
                               </div>
                               
-                              {% else %}
-                              <div class="row">
-                                <div class="col-12 col-sm-12 col-md-12 col-lg-8 col-xl-8">
-                                  <h2>К сожалению,этот раздел доступен тем,кто купил подписку!</h2>
-                                  <p>Вы можете оформить подписку здесь:</p><a class='btn btn-danger btn-lg text-light' href="/buy_subscribe">Купить</a>
-                                </div>
-                                <div class="col-12 col-sm-12 col-md-12 col-lg-0 col-xl-0" style='display:flex;align-items:center;justify-content:center;'>
-                                  <img style="height:200px;width:200px;" src="https://image.flaticon.com/icons/svg/2746/2746011.svg" alt="">
-                                </div>
-                              </div>
-                              {% endif %}
+                              
                             </div>
                             <div class="tab-pane fade" id="v-pills-config" aria-labelledby="v-pills-pconfig-tab">
                                 <div class="row">
@@ -270,7 +316,7 @@
                                       <form method="POST" class="sending-form">
                                           {% csrf_token %}
                                           <div class="form-group">
-                                              <input type="text" name="host" class="form-control" placeholder="smtp.gmail.com" required>
+                                              <input type="text" name="host" class="form-control host" placeholder="smtp.gmail.com" required>
                                               <small>Введитн ваш email host.</small>
                                           </div>
                                           <div class="form-group">
@@ -282,13 +328,13 @@
                                             <small>Введите пароль от почты.</small>
                                           </div>
                                           <div class="form-group">
-                                            <input type="number" class="form-control" name="port" required placeholder="587">
+                                            <input type="number" class="form-control port" name="port" required placeholder="587">
                                             <small>Введите порт вашего почтового сервера.</small>
                                           </div>
                                           <div class="row">
                                             <div class="col-12 col-sm-12 col-ms-12 col-lg-6 col-xl-6">
                                                 <div class="form-check">
-                                                    <input class="form-check-input" type="checkbox" name="use_tls" id="defaultCheck1">
+                                                    <input class="form-check-input use_tls" type="checkbox" name="use_tls" id="defaultCheck1">
                                                     <label class="form-check-label" for="defaultCheck1">
                                                       Будем ли мы использовать TLS?
                                                     </label>
@@ -296,7 +342,7 @@
                                             </div>
                                             <div class="col-12 col-sm-12 col-ms-12 col-lg-6 col-xl-6">
                                                 <div class="form-check">
-                                                    <input class="form-check-input" type="checkbox" name="use_ssl" id="defaultCheck2">
+                                                    <input class="form-check-input use_ssl" type="checkbox" name="use_ssl" id="defaultCheck2">
                                                     <label class="form-check-label" for="defaultCheck2">
                                                         Будем ли мы использовать SSL?
                                                     </label>
@@ -319,6 +365,17 @@
                                         <li class="list-group-item"><strong>Используем ли TLS: </strong>{{request.user.use_tls}}</li>
                                         <li class="list-group-item"><strong>Используем ли SSL: </strong>{{request.user.use_ssl}}</li>
                                       </ul>  
+                                      <center>
+                                        <div class="row mt-4" style="width:70%;">
+                                        <div id="mail_ru" style="padding: 10px 0;border-radius:10px; " class="col-12 col-sm-12 col-md-12 col-lg-5 col-xl-5 border border-primary ">
+                                          <center><img style="width:20%;" src="../static/images/mail_ru.png" alt="">  </center>
+                                        </div>
+                                        <div class="col-2"></div>
+                                        <div id="gmail_com" style="padding: 10px 0;border-radius:10px;" class="col-12 col-sm-12 col-md-12 col-lg-5 col-xl-5 border border-primary ">
+                                        <center><img style='width:20%;' src="../static/images/gmail_com.png" alt=""></center>
+                                        </div>
+                                      </div> 
+                                    </center> 
                                   </div>
                                 </div>                                
                             </div>
@@ -326,116 +383,109 @@
                         </div>
                       </div>
                 </div>
+
+                <div class="tab-pane fade" style="padding:0 10% 5% 10%;" id="nav-get" role="tabpanel" aria-labelledby="nav-get-tab">
+                  
+                    <div class="row mt-4">
+                        <div class="col-12">
+                          <center><h1>График средней стоимости</h1></center>
+                          <form method="POST" id="get_average_sum">
+                            
+                            <input type="hidden" name="get_average_sum">
+                          <center>
+                          <div style="width:80%;" class="input-group mb-3">
+                              <input name="query" id="average_query" type="text" class="form-control" placeholder="Название товара" aria-label="Recipient's username" aria-describedby="basic-addon2">
+                              <div class="input-group-append">
+                                <button class="btn btn-outline-secondary" type="submit" id="what_price">Узнать</button>
+                              </div>
+                          </div>
+                        </center>
+                          <center><h4>Средняя цена: <span id="average_span">0</span>₽</h4></center>
+                          <canvas id="average"></canvas>
+                        </form>
+                          <center><img id="mobile-best-price" src="../static/images/bubble-speech.svg" style="width:80%;height:auto;display: none;" alt=""></center>
+
+                        </div>
+                      </div>
+
+                </div>
+
                 <div class="tab-pane fade" id="nav-profile" role="tabpanel" aria-labelledby="nav-profile-tab">
                   
                   <div class="row mt-4">
                     <div class="col-12 col-sm-12 col-md-12 col-lg-3 col-xl-3">
                       <div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
-                        <a class="nav-link active" id="v-pills-home-tab" data-toggle="pill" href="#v-pills-phone_one" role="tab" aria-controls="v-pills-phone_one" aria-selected="true">На один номер</a>
-                        <a class="nav-link" id="v-pills-profile-tab" data-toggle="pill" href="#v-pills-phone_txt" role="tab" aria-controls="v-pills-phone_txt" aria-selected="false">Из txt файла</a>
-                        <!-- <a class="nav-link" id="v-pills-messages-tab" data-toggle="pill" href="#v-pills-phone_config" role="tab" aria-controls="v-pills-phone_config" aria-selected="false">Конфигурация</a> -->
+                        <a class="nav-link active" id="v-pills-home-tab" data-toggle="pill" href="#v-pills-phone_one" role="tab" aria-controls="v-pills-phone_one" aria-selected="true">Сбор клиентов tiu.ru</a>
+                        <a class="nav-link" id="v-pills-profile-tab" data-toggle="pill" href="#v-pills-phone_txt" role="tab" aria-controls="v-pills-phone_txt" aria-selected="false">Сбор клиентов avito.ru</a>
+                        <!-- <a class="nav-link" id="v-pills-messages-tab" data-toggle="pill" href="#v-pills-phone_config" role="tab" aria-controls="v-pills-phone_config" aria-selected="false">Сбор клиентов youla.ru</a> -->
                       </div>
                     </div>
                     <div class="col-12 col-sm-12 col-md-12 col-lg-9 col-xl-9">
                       <div class="tab-content" id="v-pills-tabContent">
                         <div class="tab-pane fade show active" id="v-pills-phone_one" role="tabpanel" aria-labelledby="v-pills-phone_one-tab">
-                          {% if is_paid == True %}
-                          <form method='POST' class="sending-form">
-                            {% csrf_token %}
-                            <input type="hidden" name="one_number_send">
-                            <div class="from-group">
-                              <label for="phone_number">Номер телефона</label>
-                              <input type="text" name='phone_number' class="form-control" placeholder="Телефон">
-                              <small>Введите номер телефона,на который хотите отправить SMS.</small>
-                            </div>
-                            <div class="form-group mt-2">
-                              <label for="one_message_body">Сообщение</label>
-                              <input type="text" class="form-control" name="one_message_body" placeholder="Сообщение">
-                              <small>Введите сообщение,которое хотите отправить.</small>
-                            </div>  
-                            <button type="submit" class="btn btn-block btn-primary">Отправить</button>
-                          </form>
-                          {% else %}
                           <div class="row">
-                            <div class="col-12 col-sm-12 col-md-12 col-lg-8 col-xl-8">
-                              <h2>К сожалению,этот раздел доступен тем,кто купил подписку!</h2>
-                              <p>Вы можете оформить подписку здесь:</p><a class='btn btn-danger btn-lg text-light' href="/buy_subscribe">Купить</a>
+                            <div class="col-12 col-sm-12 col-md-12 col-lg-6 col-xl-6">
+                              <center><h1 class="mb-4">Собираем вам клиентов с сайта <a href="https://tiu.ru">tiu.ru</a></h1></center>
+                            <form method="POST">
+                                {% csrf_token %}
+                                <div class="form-group">
+                                    <input type="text" name="query" class="form-control" placeholder="Запрос..." required>
+                                    <small>По какому запросу мы ищем клиентов(Например,: <span class="text-danger">iphone 7</span>,<span class='text-warning'>грузовые шины</span> и т.д.)</small>
+                                </div>
+                                <button type="submit" class="btn btn-primary btn-block">Получить клиентов</button>
+                                <input type="hidden" name='parse-tiu'>
+                                </form>
                             </div>
-                            <div class="col-12 col-sm-12 col-md-12 col-lg-0 col-xl-0" style='display:flex;align-items:center;justify-content:center;'>
-                              <img style="height:200px;width:200px;" src="https://image.flaticon.com/icons/svg/2746/2746011.svg" alt="">
+                            <div class="col-12 col-sm-12 col-md-12 col-lg-6 col-xl-6">
+                              
+                              <center><h1 class="mb-4">Ваши файлы с клиентами</h1></center>
+                              {% if parse_length != 0 %}
+                              <div class="row">
+                                {% for file in all_user_parses %}
+                                  <div class="col-6"><center><a href="{{file.url}}" download>{{file.filename}} ️️⤵️</a></center></div>
+                                {% endfor %}
+                                </div>
+                              {% else %}
+                              <center><h4 class="mb-4">К сожлалению у вас пока что нет файлов с клиентами</h4></center>
+                              <center><img style="width:80%;" src="https://image.flaticon.com/icons/png/256/1437/1437185.png" alt=""></center>
+                              {% endif %}
                             </div>
-                          </div>
-                          {% endif %}
+                          </div>  
+                          
                         </div>
                         <div class="tab-pane fade" id="v-pills-phone_txt" role="tabpanel" aria-labelledby="v-pills-phone_txt-tab">
-                          {% if is_paid == True %}  
-                          <form method='POST' enctype="multipart/form-data">
-                                {% csrf_token %}
-                                <input type="hidden" name="txt_number_send">
-                                
-                                <div class="form-group mt-2">
-                                  <label for="one_message_body">Сообщение</label>
-                                  <input type="text" class="form-control" name="one_message_body" placeholder="Сообщение">
-                                  <small>Введите сообщение,которое хотите отправить.</small>
-                                </div> 
-                                <div class='file-input'>
-                                    <input type='file' id="sms_txt_file" name="txt_file" required>
-                                    <span class='button'>Выберите</span>
-                                    <span class='label' style="color:black !important;" data-js-label id='sms_txt_label'>Файл не выбран</label>
-                                  </div>
-                                  <input type="hidden" name='sms_txt_filename' id='sms_txt_filename'>
-                                  
-                                  <small class="form-text text-muted">Выберите txt файл,который в котором нужно найти номера телефонов.</small>
-     
-                                <button type="submit" class="btn btn-block btn-primary mt-2">Отправить</button>
-                              </form>
-                              {% else %}
-                              <div class="row">
-                                <div class="col-12 col-sm-12 col-md-12 col-lg-8 col-xl-8">
-                                  <h2>К сожалению,этот раздел доступен тем,кто купил подписку!</h2>
-                                  <p>Вы можете оформить подписку здесь:</p><a class='btn btn-danger btn-lg text-light' href="/buy_subscribe">Купить</a>
-                                </div>
-                                <div class="col-12 col-sm-12 col-md-12 col-lg-0 col-xl-0" style='display:flex;align-items:center;justify-content:center;'>
-                                  <img style="height:200px;width:200px;" src="https://image.flaticon.com/icons/svg/2746/2746011.svg" alt="">
-                                </div>
+                            <div class="row">
+                              <div class="col-12 col-sm-12 col-md-12 col-lg-6 col-xl-6">
+                                <center><h1 class="mb-4">Собираем вам клиентов с сайта <a href="https://avito.ru">avito.ru</a></h1></center>
+                                <form method="POST">
+                                    {% csrf_token %}
+                                    <div class="form-group">
+                                        <input type="text" name="query" class="form-control" placeholder="Запрос..." required>
+                                        <small>По какому запросу мы ищем клиентов(Например,: <span class="text-danger">iphone 7</span>,<span class='text-warning'>грузовые шины</span> и т.д.)</small>
+                                    </div>
+                                    <button type="submit" class="btn btn-primary btn-block">Получить клиентов</button>
+                                    <input type="hidden" name='parse-avito'>
+                                    </form>
+    
                               </div>
-                              {% endif %}
+                              <div class="col-12 col-sm-12 col-md-12 col-lg-6 col-xl-6">
+                                <center><h1 class="mb-4">Ваши файлы с клиентами</h1></center>
+                                {% if parse_length != 0 %}
+                                <div class="row">
+                                {% for file in all_user_parses %}
+                                  <div class="col-6"><center><a href="{{file.url}}" download>{{file.filename}} ️️⤵️</a></center></div>
+                                {% endfor %}
+                                </div>
+                                {% else %}
+                                <center><h4 class="mb-4">К сожалению у вас пока что нет файлов с клиентами</h4></center>
+                                <center> <img style="width:80%;" src="https://image.flaticon.com/icons/svg/545/545927.svg" alt=""></center>
+                                {% endif %}
+                              </div> 
+                            </div>      
                         </div>
                         <!-- <div class="tab-pane fade" id="v-pills-phone_config" role="tabpanel" aria-labelledby="v-pills-phone_config-tab">
 
-                            <div class="row">
-                                <div class="col-12 col-sm-12 col-ms-12 col-lg-6 col-xl-6">
-                                  <h2>Измените конфигурацию</h2>
-                                    <form method="POST" class="sending-form">
-                                        {% csrf_token %}
-                                        <div class="form-group">
-                                            <input type="text" name="twilio_sid" class="form-control" placeholder="account_sid" required>
-                                            <small>Введите ваш twilio account_sid.</small>
-                                        </div>
-                                        <div class="form-group">
-                                          <input type="text" name="twilio_token" class="form-control" required placeholder="auth_token">
-                                          <small>Введите ваш twilio auth_token.</small>
-                                        </div>
-                                        <div class="form-group">
-                                          <input type="text" name="twilio_number" class="form-control" required placeholder="number">
-                                          <small>Введите ваш new twilio number</small>
-                                        </div>
-                                        
-                                  
-                                          <input type="hidden" name="twilio_config">
-                                          <button class="btn btn-block btn-primary mt-4" type="submit">Отправить</button>
-                                      </form>
-                                </div>
-                                <div class="col-12 col-sm-12 col-ms-12 col-lg-6 col-xl-6">
-                                  <h2>Ваша конфигурация</h2>
-                                  <ul class="list-group">
-                                      <li class="list-group-item"><strong>Account sid: </strong>{{request.user.twilio_account_sid}}</li>                                        
-                                      <li class="list-group-item"><strong>Auth token: </strong>{{request.user.twilio_auth_token}}</li>
-                                      <li class="list-group-item"><strong>Twilio номер телефона: </strong>{{request.user.twilio_phone_number}}</li>
-                                      </ul>  
-                                </div>
-                              </div>
-
+                            
                         </div> -->
                       </div>
                     </div>
@@ -449,14 +499,18 @@
                   <form method="POST" class="mt-4" enctype="multipart/form-data" id="upload_html_file_form">
                     {% csrf_token %}
                     <input type="hidden" value="" id="dowload_file_name" name="html_file_download">
-
-                    <div class='file-input' id="file-download">
-                      <input type='file' name="html_file" id='upload_html_file'>
-                      <span class='button'>Выбрать</span>
-                      <span class='label' id="html_download_label" style="color:black !important;" data-js-label>Файл не выбран</label>
-                    </div>
-                    <small class="form-text text-muted">Выберите HTML шаблон,который хотите сделать активным.</small>
-
+                    <div class="row">
+                      <div class="col-12 col-sm-12 col-md-12 col-lg-10 col-xl-10">
+                          <div class='file-input' id="file-download">
+                              <input type='file' name="html_file" id='upload_html_file'>
+                              <span class='button'>Выбрать</span>
+                              <span class='label' id="html_download_label" style="color:black !important;" data-js-label>Файл не выбран</label>
+                            </div>
+                          </div>
+                      <div class="col-12 col-sm-12 col-md-12 col-lg-2 col-xl-2" style="display:flex;align-items:center;justify-content:center;flex-direction:column;">
+                          <a href="/editor" class="btn btn-secondary btn-block btn-lg">Редактор шаблонов</a>
+                      </div>
+                  </div>
 
                   </form>
 
@@ -477,20 +531,83 @@
                       </div>
                     </div>
                     {% endfor %}
+                    {% for template in all_user_templates_from_constructor %}
+                    <div class="col-sm-12 col-12 col-lg-3 col-xl-3 col-md-12" style="text-align: center;">
+                      <div class="card template_change_card" style='{% if template.url == request.user.active_template%}border:3px solid #007bff{%endif%}'>
+                        <div class="card-body">
+                          <form class="change_active_template_form" class="sending-form" method="POST">
+                            {% csrf_token %}
+                            <input type="hidden" name="template_construct_url" value="{{template.url}}">
+                            <input type="hidden" name="template_construct_id" value='{{template.id}}'>
+                            <h5 class="card-title">{{template.filename}}</h5>
+                          </form>
+                          <a href="/preview_from_constructor?id={{template.id}}" class="btn btn-primary btn-block preview-button" id='preview_btn'>Посмотреть</a>
+                        </div>
+                      </div>
+                    </div>
+                    {% endfor %}
                   </div>
 
                 </div>
                   
+                <div class="tab-pane fade" id="nav-statistic" role="tabpanel" aria-labelledby="nav-statistic-tab">
+                 
+                  <div class="row mt-4">
+                    <div class="col-12 col-sm-12 col-md-12 col-lg-6 col-xl-6">
+                      <center><h4>Статистика Email</h4></center>
+                      <canvas id="email_statistics"></canvas>
+                      <div class="row mt-4">
+                          <div class="col-12 col-sm-12 col-md-12 col-lg-6 col-xl-6">
+                              <h4>Отправлено: <span class="text-success" id="sent_mails">{{request.user.sent}}</span></h4>
+                              <h4>Не отправлено: <span class="text-danger" id="unsent_mails">{{request.user.unsent}}</span></h4>
+                              <h4>Осталось: <span class="text-warning">{{request.user.emails_amount}}</span></h4>
+                          </div>
+                          <div class="col-12 col-sm-12 col-md-12 col-lg-6 col-xl-6">
+                              <center>
+                                  <img style="height:150px;width:150px;" src="https://image.flaticon.com/icons/svg/2546/2546419.svg" alt="">
+                                </center>
+                          </div>
+                      </div>
+                      
+                    </div>
+                    <div class="col-12 col-sm-12 col-md-12 col-lg-6 col-xl-6">
+                      <center><h4>Статистика Сбора клиентов</h4></center>
+                      <canvas id="parsing_statistics"></canvas>
+                      
+                      <div class="row mt-4">
+                        <div class="col-12 col-sm-12 col-md-12 col-lg-6 col-xl-6">
+                            <h4>Распарсилось: <span class="text-success" id="parsed">{{request.user.parsed}}</span></h4>
+                            <h4>Не распарсилось: <span class="text-danger" id="unparsed">{{request.user.unparsed}}</span></h4>
+                            <h4>Осталось avito.ru: <span class="text-warning">{{request.user.parse_avito_amount}}</span></h4>
+                            <h4>Осталось tiu.ru: <span class="text-warning">{{request.user.parse_tiu_amount}}</span></h4>
+                            
+                        </div>
+                        <div class="col-12 col-sm-12 col-md-12 col-lg-6 col-xl-6">
+                           <center>
+                             <img style="height:150px;width:150px;" src="https://image.flaticon.com/icons/svg/2498/2498483.svg" alt="">
+                           </center>
+                        </div>
+
+                      </div>
+                      
+
+                    </div>
+                  </div>
+
+                  
+
+                </div>
+
               </div>
       </div>
 
-
-
-      <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+      {% include "preloader-script.html" %}
       <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
       <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
-
+      <script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.3/dist/Chart.min.js"></script>
       <script src="../static/js/script.js"></script>
+      {% include "payment-widget.html" %}
+      {% include "avg-price.html" %}
 
-</body>
+      </body>
 </html>
